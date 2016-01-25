@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from shared_files.dishi_user import Dishi_User, Dish_Item, Dish_Created_At
+from shared_files.dishi_user import Dishi_User, Dish_Item
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
