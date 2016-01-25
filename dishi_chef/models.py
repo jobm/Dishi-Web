@@ -65,8 +65,6 @@ class Recipe(Dish_Item):
 # this is field to createa a list of members
 class member(models.Model):
     user_name = models.CharField(max_length=50, blank=True)
-    date_created = models.DateTimeField(auto_now=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
 
 
 # model for a kitchens Team
