@@ -1,0 +1,4 @@
+Django==1.8
+pep8==1.7.0
+Pillow==3.1.0
+wheel==0.24.0
