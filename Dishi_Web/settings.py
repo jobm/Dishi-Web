@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'registration',
     'dishi_chef',
-    'auth',
+    'dishi_auth',
 )
 
 MIDDLEWARE_CLASSES = (
