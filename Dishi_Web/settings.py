@@ -37,7 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'registration',
     'dishi_chef',
+    'auth',
 )
 
 MIDDLEWARE_CLASSES = (
