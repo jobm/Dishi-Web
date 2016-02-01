@@ -10,3 +10,4 @@ DevBox/__pycache__/
 *.pyo
 /venv/
 /db.sqlite3
+migrations
