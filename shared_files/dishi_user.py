@@ -20,3 +20,17 @@ class Dish_Item(models.Model):
 
     class Meta:
         abstract = True
+
+# this fields are use for the multiselec/choice fileds of the chef model
+BUSSINES_TYPE_CHOICES = [
+                            ('type_1', 'Start a Food Business'),
+                            ('tpye_2', 'Scale an existing food business'),
+                            ('type_3', 'Sell food in my spare time'),
+                            ('type_4', 'Offer cooking classes'),
+                        ]
+KITCHEN_TYPE_CHOICES = [
+                            ('type_1', 'bakery'),
+                            ('type_2', 'cuisine'),
+                            ('type_3', 'African'),
+                            ('type_4', 'Other'),
+                       ]

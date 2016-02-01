@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-from shared_files.dishi_user import Dishi_User, Dish_Item
+from shared_files.dishi_user import (Dishi_User, Dish_Item,
+                                     BUSSINES_TYPE_CHOICES,
+                                     KITCHEN_TYPE_CHOICES,)
+
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
@@ -13,42 +16,9 @@ class Chef(Dishi_User):
     date_updated = models.DateTimeField(auto_now_add=True)
 
 
-# a list of business types it's just a field in the Kitchen model
-"""
-class business_types(models.Model):
-    bussiness_type = models.CharField(max_length=50, blank=False)
-"""
-
-
-# a list of kitchen types it's just a field in the Kitchen model
-"""
-class kitchen_types(models.Model):
-    kitchen_type = models.CharField(max_length=50, blank=False)
-"""
-
-BUSSINES_TYPE_CHOICES = [
-                            ('type_1', 'Start a Food Business'),
-                            ('tpye_2', 'Scale an existing food business'),
-                            ('type_3', 'Sell food in my spare time'),
-                            ('type_4', 'Offer cooking classes'),
-                        ]
-KITCHEN_TYPE_CHOICES = [
-                            ('type_1', 'bakery'),
-                            ('type_2', 'cuisine'),
-                            ('type_3', 'African'),
-                            ('type_4', 'Other'),
-                       ]
-
-
 # model to create a Kitchen
 class Kitchen(models.Model):
     kitchen_name = models.CharField(max_length=50, blank=False)
-    """ this is are fields to create multiple fields to store kitchen bussiness
-    types and kitchen type and relates to the
-    "bussiness_types and kitchen_types" model above respectively as a
-    Many To Many relationship"""
-    # bussiness_type = models.ManyToManyField(business_types)
-    # kitchen_type = models.ManyToManyField(kitchen_types)
     bussiness_type = models.CharField(choices=BUSSINES_TYPE_CHOICES,
                                       max_length=50,
                                       blank=False)
