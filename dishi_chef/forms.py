@@ -8,10 +8,13 @@ challenging but incase of problems, tell me.
 """
 
 
-# create a chef form here"""
+# create a chef form here
 class ChefForm(forms.ModelForm):
-    # add chef fields here
-    pass
+    class Meta:
+        model=Chef
+        fields=['first_name','user_name','profile_picture','email_address']
+    def clean(self):
+        return self.cleaned_data
 
 
 # this form should only have about three fields for now
