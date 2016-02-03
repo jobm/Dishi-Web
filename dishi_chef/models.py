@@ -8,21 +8,9 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 class Chef(Dishi_User):
     """this field creates a relationship to a user of dishi identifying them as
     a type of a user"""
-    owner = models.OneToOneField(User, unique=True)
+    #owner = models.OneToOneField(User, unique=True)
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
-
-
-# a list of business types it's just a field in the Kitchen model
-class business_types(models.Model):
-    Kitchen_choices=[('a','Start a Food Business'),('b','Scale an existing food business'),('c','Sell food in my spare time'),('d','Offer cooking classes'),]
-    bussiness_type =models.CharField(max_length=1,choices=Kitchen_choices)
-
-
-# a list of kitchen types it's just a field in the Kitchen model
-class kitchen_types(models.Model):
-    kitchen_types=[('a','Bakery'),('b','African Cuisine'),('c','Intercontinental Cuisine'),]
-    kitchen_type = models.CharField(max_length=1, blank=False,choices=kitchen_types)
 
 # model to create a Kitchen
 
@@ -46,7 +34,6 @@ class Kitchen(models.Model):
 
     """"this field creates a relationship to a chef identifying them as an onwer
     of a kitchen meaning one chef one kitchen"""
-    #owner = models.OneToOneField(Chef, primary_key=True)
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 

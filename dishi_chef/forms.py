@@ -1,5 +1,14 @@
 from django import forms
-from .models import Chef,business_types,kitchen_types,Kitchen
+from .models import Chef,Kitchen
+
+
+
+class ChefForm(forms.ModelForm):
+	class Meta:
+		model=Chef
+		fields=['first_name','user_name','profile_picture','email_address']
+	def clean(self):
+		return self.cleaned_data
 
 
 
@@ -14,14 +23,17 @@ class KitchenForm(forms.ModelForm):
 
 	class Meta:
 		model=Kitchen
-		fields=['full_name','email','password','confirm_password','kitchen_type']
+		
+		fields=['full_name','email','password','confirm_password','kitchen_type','bussiness_type']
+
+
 
 	#The below method cleans data and allows for only .com extension emails to be used
 
-	def clean_email(self):
+	"""def clean_email(self):
 		email=self.cleaned_data.get('email')
 		if not ".com" in email:
-			raise forms.ValidationError("Please use your moringa email to register")
+			raise forms.ValidationError("Please use your .com email to register")
 		return email
 
 	def clean(self):
@@ -29,4 +41,5 @@ class KitchenForm(forms.ModelForm):
 		confirm_password = self.cleaned_data.get('confirm_password')
 		if password and password != confirm_password:
 			raise forms.ValidationError("Passwords don't match")
-		return self.cleaned_data
+		return self.cleaned_data"""
+

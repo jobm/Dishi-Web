@@ -4,11 +4,11 @@
 	<title></title>
 </head>
 <body>
-<form  method="POST" action="">{%csrf_token%}
+<form  method="POST" action="" enctype="multipart/form-data">{%csrf_token%}
 
-	{{form.as_p}}
+	{{chef_form.as_p}}
 
-	<input type="submit" value="Subscribe">
+	<input type="submit" value="Create kitchen">
 </form>
 </body>
 </html>
