@@ -1,0 +1,44 @@
+
+/*----------------------------------------------------------------*/
+/*-----STYLED-----*/
+@font-face {
+    font-family: SlimJoe;
+    src: url(../font/SlimJoe.otf);
+}
+
+@font-face {
+    font-family: Chardons;
+    src: url(../font/Chardons/Chardons.ttf);
+}
+
+@font-face {
+    font-family: Metropolis;
+    src: url(../font/Metropolis.otf);
+}
+
+
+/*----------------------------------------------------------------*/
+/*-----Normal-----*/
+
+/*Raleway*/
+@font-face {
+    font-family: Raleway-Regular;
+    src: url(../font/raleway/Raleway-Regular.otf);
+}
+
+
+/*DAX*/
+@font-face {
+    font-family: DaxBold;
+    src: url(../font/Dax/DaxBold.ttf);
+}
+
+@font-face {
+    font-family: DaxMedium;
+    src: url(../font/Dax/DaxMedium.ttf);
+}
+
+@font-face {
+    font-family: DaxRegular;
+    src: url(../font/Dax/DaxRegular.ttf);
+}

@@ -1,10 +1,13 @@
-{% extends "base.html" %}
-
-{% block content %}
-
-<form action="" method="POST">
-  {% csrf_token %}
-  {{ kitchen_form }}
-</form>
-
-{% endblock content%}
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+<div id="inside-forms" class="row center-h">
+  <div class="row form-row">
+    <div class="round-plain">
+      <form action="" method="POST">
+        {% csrf_token %}
+        {% crispy kitchen_form %}
+        <a href="#" class="button submit orange-bg">Submit</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

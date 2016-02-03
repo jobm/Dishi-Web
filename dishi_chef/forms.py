@@ -15,8 +15,12 @@ class KitchenForm(forms.ModelForm):
     class Meta:
         model = Kitchen
         fields = ['kitchen_name', 'bussiness_type', 'kitchen_type']
-    bussiness_type = forms.ChoiceField(
-        choices=BUSSINES_TYPE_CHOICES, widget=forms.RadioSelect)
 
-    kitchen_type = forms.ChoiceField(
-        choices=KITCHEN_TYPE_CHOICES, widget=forms.SelectMultiple)
+    bussiness_type = forms.MultipleChoiceField(
+        label="What kind of kitchen do you need?",
+        choices=BUSSINES_TYPE_CHOICES, widget=forms.RadioSelect(
+            attrs={'class': 'radio_field'}
+        ))
+
+    kitchen_type = forms.MultipleChoiceField(
+        choices=KITCHEN_TYPE_CHOICES, widget=forms.Select)

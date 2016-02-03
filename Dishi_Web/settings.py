@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+    'crispy_forms_foundation',
     'registration',
     'dishi_chef',
     'dishi_auth',
@@ -107,3 +109,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('foundation-5')
+CRISPY_TEMPLATE_PACK = 'foundation-5'
