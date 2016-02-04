@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from dishi_chef.forms import KitchenForm, InviteForm
+from dishi_chef.models import Invite
 
 
 # Create your views here.
@@ -18,10 +19,21 @@ def kitchen_form_view(request):
 def invite_team(request):
     invite_form = InviteForm(request.POST or None)
     context = {}
+    invite = Invite()
     if request.method == 'POST':
         if invite_form.is_valid():
             email = invite_form.cleaned_data.get('recepient_email')
-            print(email)
+            invite.recepient_email = email
+            invite.hash_token = invite.generate_unique_hash()
+            # invite.owner = request.user
+            print(email, invite.hash_token, generate_url(invite.hash_token))
+            invite.save()
             return redirect('/dishi/chef/')
     context = {"invite_form": invite_form}
     return render(request, "invite.html", context=context)
+
+
+def generate_url(str_token):
+    url = "http://127.0.0.1:8000/dishi/accounts"
+    slash = "/"
+    return "{}{}{}".format(url, slash, str_token)

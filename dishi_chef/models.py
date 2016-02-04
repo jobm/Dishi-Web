@@ -88,7 +88,7 @@ class Team(models.Model):
 
 # invite model
 class Invite(models.Model):
-    owner = models.ForeignKey(User)
+    # owner = models.ForeignKey(User)
     recepient_email = models.EmailField(blank=False)
     hash_token = models.CharField(blank=False, unique=True, max_length=36)
 
@@ -97,7 +97,7 @@ class Invite(models.Model):
         return str(hash.uuid5(hash.NAMESPACE_URL, self.recepient_email))
 
     # override save method
-    def save(self, *args, **kwargs):
-        if not self.hash_token:
-            self.hash_token = self.generate_unique_hash()
-        super(self, Invite).save(*arg, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.hash_token:
+    #         self.hash_token = self.generate_unique_hash()
+    #     super(self, Invite).save(*arg, **kwargs)

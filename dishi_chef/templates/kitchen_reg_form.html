@@ -6,7 +6,8 @@
     <div class="round-plain">
       <form action="" method="POST">
         {% csrf_token %}
-        {% crispy kitchen_form %}
+        <!--{% crispy kitchen_form %}-->
+        {{kitchen_form}}
         <a href="#" class="button submit orange-bg">Submit</a>
       </form>
     </div>
