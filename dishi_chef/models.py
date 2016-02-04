@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from shared_files.dishi_user import (Dishi_User, Dish_Item,
                                      BUSSINES_TYPE_CHOICES,
                                      KITCHEN_TYPE_CHOICES,)
+import uuid as hash
 
 from django.core.validators import MinValueValidator, MaxValueValidator
 
@@ -77,3 +78,25 @@ class Team(models.Model):
 
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
+
+
+""" your invitation model should store a unique,
+    random token and ForeignKey to the chef's kitchen
+    you send e-mail with a link with that token,
+    then you look up the tokens in the view"""
+
+
+# invite model
+class Invite(models.Model):
+    owner = models.ForeignKey(User)
+    hash_token = models.CharField(blank=False, unique=True, max_length=36)
+
+    # method to generate unique token
+    def generate_unique_hash(self, email):
+        return str(hash.uuid5(hash.NAMESPACE_URL, recepient_email))
+
+    # override save method
+    def save(self, email, *args, **kwargs):
+        if not self.hash_token:
+            self.hash_token = self.generate_unique_hash(self.recepient_email)
+        super(self, Invite).save(*arg, **kwargs)
