@@ -1,5 +1,5 @@
 from django import forms
-from .models import Chef, Kitchen
+from .models import Chef, Kitchen, Invite
 from shared_files.dishi_user import BUSSINES_TYPE_CHOICES, KITCHEN_TYPE_CHOICES
 
 
@@ -24,3 +24,10 @@ class KitchenForm(forms.ModelForm):
 
     kitchen_type = forms.MultipleChoiceField(
         choices=KITCHEN_TYPE_CHOICES, widget=forms.Select)
+
+
+# this a form to invite a user to a kitchen
+class InviteForm(forms.ModelForm):
+    class Meta:
+        model = Invite
+        fields = ['recepient_email']

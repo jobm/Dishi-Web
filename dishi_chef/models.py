@@ -89,14 +89,15 @@ class Team(models.Model):
 # invite model
 class Invite(models.Model):
     owner = models.ForeignKey(User)
+    recepient_email = models.EmailField(blank=False)
     hash_token = models.CharField(blank=False, unique=True, max_length=36)
 
     # method to generate unique token
-    def generate_unique_hash(self, email):
-        return str(hash.uuid5(hash.NAMESPACE_URL, recepient_email))
+    def generate_unique_hash(self):
+        return str(hash.uuid5(hash.NAMESPACE_URL, self.recepient_email))
 
     # override save method
-    def save(self, email, *args, **kwargs):
+    def save(self, *args, **kwargs):
         if not self.hash_token:
-            self.hash_token = self.generate_unique_hash(self.recepient_email)
+            self.hash_token = self.generate_unique_hash()
         super(self, Invite).save(*arg, **kwargs)
