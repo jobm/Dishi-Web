@@ -13,28 +13,47 @@ class Chef(Dishi_User):
     date_updated = models.DateTimeField(auto_now_add=True)
 
 # model to create a Kitchen
-
 class Kitchen(models.Model):
 
-    kitchen_types=[('a','Bakery'),('b','African Cuisine'),('c','Intercontinental Cuisine'),]
-    Kitchen_choices=[('a','Start a Food Business'),('b','Scale an existing food business'),('c','Sell food in my spare time'),('d','Offer cooking classes'),]
+    kitchen_types=[('a', 'Bakery'),
+                    ('b', 'African Cuisine'),
+                    ('c', 'Intercontinental Cuisine'), ]
 
-    
-    full_name=models.CharField(max_length=120,blank=False,null=True)
-    email=models.EmailField(blank=False,null=True)
-    password=models.CharField(max_length=20,blank=False,null=True)
-    confirm_password=models.CharField(max_length=20,blank=False,null=True)    
-    kitchen_name = models.OneToOneField(Chef, primary_key=True)
+    Kitchen_choices=[('a', 'Start a Food Business'),
+                        ('b', 'Scale an existing food business'),
+                        ('c', 'Sell food in my spare time'),
+                        ('d','Offer cooking classes'), ]
+
+    full_name=models.CharField(
+        max_length=120, blank=False, null=True)
+
+    email=models.EmailField(
+        blank=False, null=True)
+
+    password=models.CharField(
+        max_length=20, blank=False, null=True)
+
+    confirm_password=models.CharField(
+        max_length=20, blank=False, null=True)
+
+    kitchen_name = models.OneToOneField(
+        Chef, primary_key=True)
+
     #multiple choice fields
     """ this is a field to create multiple fields to store members user_names
     it relates to the "kitchen_types" model above as a Many To Many
     relationship"""
-    kitchen_type = models.CharField(max_length=1, blank=False,choices=kitchen_types)
-    bussiness_type =models.CharField(max_length=1,blank=False,choices=Kitchen_choices)
+
+    kitchen_type = models.CharField(
+        max_length=1, blank=False, choices=kitchen_types)
+
+    bussiness_type =models.CharField(
+        max_length=1, blank=False, choices=Kitchen_choices)
 
     """"this field creates a relationship to a chef identifying them as an onwer
     of a kitchen meaning one chef one kitchen"""
     date_created = models.DateTimeField(auto_now=True)
+
     date_updated = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -43,9 +62,12 @@ class Kitchen(models.Model):
 
 # model to create Kitchens menu
 class Menu(Dish_Item):
+
     cost = models.FloatField(blank=False)
+
     """this field creates a relationship meaning that a kitchen can have many
     menus"""
+
     owner = models.ForeignKey(Kitchen)
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
@@ -83,4 +105,3 @@ class Team(models.Model):
     kitchen = models.OneToOneField(Kitchen, primary_key=True)
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
-

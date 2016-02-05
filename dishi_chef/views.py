@@ -23,6 +23,6 @@ def Chef (request):
 		instance =form.save(commit=False)
 		instance.save()
 
-	return render(request,"index.html",context)
+	return render(request,"blog.html",context)
 
 
