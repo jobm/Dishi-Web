@@ -1,5 +1,8 @@
 from django import forms
 from .models import Chef, Kitchen
+from crispy_forms_foundation.forms import FoundationModelForm
+from crispy_forms.helper import FormHelper
+
 
 """
 look into crispy-forms-foundation and model the forms around that, it also
@@ -7,14 +10,16 @@ comes with validation called 'abide' look at that as well, it may prove abit
 challenging but incase of problems, tell me.
 """
 
-class ChefForm(forms.ModelForm):
+class ChefForm(FoundationModelForm):
+
     class Meta:
         model = Chef
         fields = ['user_name', 'first_name', 'last_name',
                     'profile_picture', 'email_address']
 
-    def clean(self):
-        return self.cleaned_data
+    def __init__(self, *args, **kwargs):
+        super(FoundationModelForm, self).__init__(*args, **kwargs)
+        self.init_helper()
 
 
 class KitchenForm(forms.ModelForm):
