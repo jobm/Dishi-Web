@@ -34,6 +34,5 @@ def invite_team(request):
 
 
 def generate_url(str_token):
-    url = "http://127.0.0.1:8000/dishi/accounts"
-    slash = "/"
-    return "{}{}{}".format(url, slash, str_token)
+    url = "http://127.0.0.1:8000/dishi/accounts/"
+    return "{}{}".format(url, str_token)
