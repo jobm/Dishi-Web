@@ -1,6 +1,11 @@
 from django import forms
 from .models import Chef, Kitchen
 
+"""
+look into crispy-forms-foundation and model the forms around that, it also
+comes with validation called 'abide' look at that as well, it may prove abit
+challenging but incase of problems, tell me.
+"""
 
 class ChefForm(forms.ModelForm):
     class Meta:

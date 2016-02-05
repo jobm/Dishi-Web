@@ -8,12 +8,10 @@ class ChefAdmin(admin.ModelAdmin):
 	# below is how we say use the model form now! 
 	form = ChefForm
 
-#Class that gives the admin more controll
 class KitchenAdmin(admin.ModelAdmin):
 	list_display = ["full_name","email",'password','confirm_password','kitchen_type','bussiness_type']
 	# below is how we say use the model form now! 
 	form = KitchenForm
-
 
 	
 admin.site.register(Chef,ChefAdmin)				

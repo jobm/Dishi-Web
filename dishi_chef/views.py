@@ -1,19 +1,22 @@
 from django.shortcuts import render
-from .forms import ChefForm
+
+from .forms import ChefForm, KitchenForm
 #Create your views here.
 
-"""def kitchen (request):
-	form = KitchenForm(request.POST or None)
 
-	context={
-	"kitchenform":form,
-	}
-	if form.is_valid():
-		instance =form.save(commit=False)
-		instance.save()
+def kitchen(request):
+    form = KitchenForm(request.POST or None)
 
-	return render(request,"index.html",context)
-"""
+    context = {
+        "form": form,
+    }
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+
+    return render(request, "index.html", context)
+
+
 def Chef (request):
 	form = ChefForm(request.POST or None, request.FILES or None)
 	context={
@@ -24,5 +27,3 @@ def Chef (request):
 		instance.save()
 
 	return render(request,"blog.html",context)
-
-
