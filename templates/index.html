@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Kitchen Form | Welcome</title>
 <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
  
@@ -16,7 +17,8 @@
 
 	{{form.as_p}}
 
-	<input type="submit" value="Create kitchen">
+	<button><input type="submit" value="Create kitchen" ></button>
+
 </form>
 
 
@@ -26,6 +28,16 @@
 <script>
       $(document).foundation();
     </script>
+
+<!-- Abide validations -->
+<script type="text/javascript" src="{{ STATIC_URL }}js/crispy_forms_foundation/plugins.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function() {
+    $('form').abide_support_for_tabs();
+});
+//]]>
+
 </body>
 </html>
 

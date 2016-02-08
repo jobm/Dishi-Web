@@ -26,4 +26,4 @@ def Chef (request):
 		instance =form.save(commit=False)
 		instance.save()
 
-	return render(request,"blog.html",context)
+	return render(request,"chef.html",context)

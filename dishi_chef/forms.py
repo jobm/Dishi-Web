@@ -11,15 +11,13 @@ challenging but incase of problems, tell me.
 """
 
 class ChefForm(FoundationModelForm):
-
-    class Meta:
-        model = Chef
-        fields = ['user_name', 'first_name', 'last_name',
-                    'profile_picture', 'email_address']
-
-    def __init__(self, *args, **kwargs):
-        super(FoundationModelForm, self).__init__(*args, **kwargs)
-        self.init_helper()
+	class Meta:
+		model = Chef
+		fields = ['user_name', 'first_name', 'last_name',
+			            'profile_picture', 'email_address']
+def __init__(self, *args, **kwargs):
+	super(FoundationModelForm, self).__init__(*args, **kwargs)
+	self.init_helper()
 
 
 class KitchenForm(forms.ModelForm):
@@ -33,12 +31,12 @@ class KitchenForm(forms.ModelForm):
     kitchen_types=[('a', 'Bakery'),
 	                ('b', 'African Cuisine'),
 	                ('c', 'Intercontinental Cuisine'), ]
-    kitchen_type = forms.TypedChoiceField(
-        choices=kitchen_types, widget=forms.SelectMultiple)
+    kitchen_type = forms.MultipleChoiceField(required=False,
+                    widget=forms.CheckboxSelectMultiple, choices=kitchen_types)
     
     class Meta:
         model=Kitchen
-        fields = ['kitchen_name', 'bussiness_type', 'kitchen_type']
+        fields = [ 'bussiness_type', 'kitchen_type']
 
 	#The below method cleans data and allows for only .com extension emails to be used
 
