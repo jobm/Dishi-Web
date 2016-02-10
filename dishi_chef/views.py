@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from dishi_chef.forms import KitchenForm, InviteForm
 from dishi_chef.models import Invite
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -26,7 +27,10 @@ def invite_team(request):
             invite.recepient_email = email
             invite.hash_token = invite.generate_unique_hash()
             # invite.owner = request.user
-            print(email, invite.hash_token, generate_url(invite.hash_token))
+            # print(email, invite.hash_token, generate_url(invite.hash_token))
+            send_mail("Invite to team", generate_url(invite.hash_token),
+                      "EMail sender <jobmwaniki18@gmail.com>",
+                      [email])
             invite.save()
             return redirect('/dishi/chef/')
     context = {"invite_form": invite_form}

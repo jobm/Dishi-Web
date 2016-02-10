@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
+from shared_files.config import *
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'djril',
+    'djrill',
     'crispy_forms',
     'crispy_forms_foundation',
     'registration',
@@ -114,3 +114,8 @@ STATICFILES_DIRS = (
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('foundation-5')
 CRISPY_TEMPLATE_PACK = 'foundation-5'
+
+# djrill email settings
+MANDRILL_API_KEY = MANDRILL_API_KEY
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+DEFAULT_FROM_EMAIL = "dishicommunity@gmail.com"
