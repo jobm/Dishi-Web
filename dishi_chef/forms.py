@@ -1,32 +1,33 @@
 from django import forms
-from .models import Chef,business_types,kitchen_types,Kitchen
+from .models import Chef, Kitchen, Invite
+from shared_files.dishi_user import BUSSINES_TYPE_CHOICES, KITCHEN_TYPE_CHOICES
 
 
+# form to create a chef, currently not working
+class ChefForm(forms.ModelForm):
+    # add chef fields here
+    pass
 
+
+# this form should only have about three fields for now
 class KitchenForm(forms.ModelForm):
-	Kitchen_choices=[('a','Start a Food Business'),('b','Scale an existing food business'),('c','Sell food in my spare time'),('d','Offer cooking classes'),]
-	
-	bussiness_type = forms.TypedChoiceField(choices=Kitchen_choices, widget=forms.RadioSelect)
 
-	kitchen_types=[('a','Bakery'),('b','African Cuisine'),('c','Intercontinental Cuisine'),]
+    class Meta:
+        model = Kitchen
+        fields = ['kitchen_name', 'bussiness_type', 'kitchen_type']
 
-	kitchen_type = forms.TypedChoiceField(choices=kitchen_types, widget=forms.RadioSelect)
+    bussiness_type = forms.MultipleChoiceField(
+        label="What kind of kitchen do you need?",
+        choices=BUSSINES_TYPE_CHOICES, widget=forms.RadioSelect(
+            attrs={'class': 'radio_field'}
+        ))
 
-	class Meta:
-		model=Kitchen
-		fields=['full_name','email','password','confirm_password','kitchen_type']
+    kitchen_type = forms.MultipleChoiceField(
+        choices=KITCHEN_TYPE_CHOICES, widget=forms.Select)
 
-	#The below method cleans data and allows for only .com extension emails to be used
 
-	def clean_email(self):
-		email=self.cleaned_data.get('email')
-		if not ".com" in email:
-			raise forms.ValidationError("Please use your moringa email to register")
-		return email
-
-	def clean(self):
-		password = self.cleaned_data.get('password')
-		confirm_password = self.cleaned_data.get('confirm_password')
-		if password and password != confirm_password:
-			raise forms.ValidationError("Passwords don't match")
-		return self.cleaned_data
+# this a form to invite a user to a kitchen
+class InviteForm(forms.ModelForm):
+    class Meta:
+        model = Invite
+        fields = ['recepient_email']

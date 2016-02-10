@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
+from shared_files.config import *
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -38,6 +38,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dishi_chef',
+    'django.contrib.sites',
+    'djrill',
+    'crispy_forms',
+    'crispy_forms_foundation',
+    'registration',
+    'dishi_chef',
+    'dishi_auth',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -101,3 +108,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'assets'),
+)
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('foundation-5')
+CRISPY_TEMPLATE_PACK = 'foundation-5'
+
+# djrill email settings
+MANDRILL_API_KEY = MANDRILL_API_KEY
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+DEFAULT_FROM_EMAIL = "dishicommunity@gmail.com"

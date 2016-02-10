@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <form class="round-plain" action="{% url 'dishi_chef:i_form' %}" method="POST">
+    {% csrf_token %}
+    {{ invite_form }}
+    <input type="submit" class="button submit orange-bg" value="Invite"/>
+  </form>
+{% endblock %}

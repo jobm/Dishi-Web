@@ -1,0 +1,30 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dishi</title>
+
+   <link rel="stylesheet" href="{% static 'foundation/css/normalize.css' %}">
+   <link rel="stylesheet" href="{% static 'slider/vegas.min.css' %}">
+   <link rel="stylesheet" href="{% static 'foundation/foundation-icons/foundation-icons.css' %}">
+   <link rel="stylesheet" href="{% static 'foundation/css/foundation.min.css' %}">
+   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+   <link rel="stylesheet" href="{% static 'font/fonts.css' %}">
+   <link rel="stylesheet" href="{% static 'foundation/css/app.css' %}">
+
+</head>
+<body>
+
+{% block content %}
+
+{% endblock %}
+
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+<script type="text/javascript" src="{% static 'foundation/js/foundation.js'%}">
+
+</script>
+
+</body>
+</html>
