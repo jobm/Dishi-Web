@@ -8,7 +8,7 @@ import uuid as hash
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
-#Create your models here.
+# Create your models here.
 class Chef(Dishi_User):
     """this field creates a relationship to a user of dishi identifying them as
     a type of a user"""
@@ -17,45 +17,8 @@ class Chef(Dishi_User):
     date_updated = models.DateTimeField(auto_now_add=True)
 
 
-<<<<<<< HEAD
-# a list of business types it's just a field in the Kitchen model
-class business_types(models.Model):
-    Kitchen_choices=[('a','Start a Food Business'),('b','Scale an existing food business'),('c','Sell food in my spare time'),('d','Offer cooking classes'),]
-    bussiness_type =models.CharField(max_length=1,choices=Kitchen_choices)
-
-
-# a list of kitchen types it's just a field in the Kitchen model
-class kitchen_types(models.Model):
-    kitchen_types=[('a','Bakery'),('b','African Cuisine'),('c','Intercontinental Cuisine'),]
-    kitchen_type = models.CharField(max_length=1, blank=False,choices=kitchen_types)
-
-=======
->>>>>>> jobm
 # model to create a Kitchen
-
 class Kitchen(models.Model):
-<<<<<<< HEAD
-
-    kitchen_types=[('a','Bakery'),('b','African Cuisine'),('c','Intercontinental Cuisine'),]
-    Kitchen_choices=[('a','Start a Food Business'),('b','Scale an existing food business'),('c','Sell food in my spare time'),('d','Offer cooking classes'),]
-
-    
-    full_name=models.CharField(max_length=120,blank=False,null=True)
-    email=models.EmailField(blank=False,null=True)
-    password=models.CharField(max_length=20,blank=False,null=True)
-    confirm_password=models.CharField(max_length=20,blank=False,null=True)    
-    kitchen_name = models.OneToOneField(Chef, primary_key=True)
-    #multiple choice fields
-    """ this is a field to create multiple fields to store members user_names
-    it relates to the "kitchen_types" model above as a Many To Many
-    relationship"""
-    kitchen_type = models.CharField(max_length=1, blank=False,choices=kitchen_types)
-    bussiness_type =models.CharField(max_length=1,blank=False,choices=Kitchen_choices)
-
-    """"this field creates a relationship to a chef identifying them as an onwer
-    of a kitchen meaning one chef one kitchen"""
-    #owner = models.OneToOneField(Chef, primary_key=True)
-=======
     kitchen_name = models.CharField(max_length=50, blank=False)
     bussiness_type = models.CharField(choices=BUSSINES_TYPE_CHOICES,
                                       max_length=50,
@@ -66,7 +29,6 @@ class Kitchen(models.Model):
     """"this field creates a relationship to a chef identifying them as an
     onwer of a kitchen meaning one chef one kitchen"""
     owner = models.OneToOneField(Chef, primary_key=True)
->>>>>>> jobm
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 
@@ -117,9 +79,6 @@ class Team(models.Model):
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 
-<<<<<<< HEAD
-=======
-
 """ your invitation model should store a unique,
     random token and ForeignKey to the chef's kitchen
     you send e-mail with a link with that token,
@@ -141,4 +100,3 @@ class Invite(models.Model):
     #     if not self.hash_token:
     #         self.hash_token = self.generate_unique_hash()
     #     super(self, Invite).save(*arg, **kwargs)
->>>>>>> jobm

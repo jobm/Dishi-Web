@@ -14,16 +14,9 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='business_types',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
-                ('bussiness_type', models.CharField(max_length=50)),
-            ],
-        ),
-        migrations.CreateModel(
             name='Chef',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
                 ('user_name', models.CharField(blank=True, max_length=50)),
                 ('first_name', models.CharField(max_length=50)),
                 ('last_name', models.CharField(max_length=50)),
@@ -37,16 +30,17 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='kitchen_types',
+            name='Invite',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
-                ('kitchen_type', models.CharField(max_length=50)),
+                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('recepient_email', models.EmailField(max_length=254)),
+                ('hash_token', models.CharField(max_length=36, unique=True)),
             ],
         ),
         migrations.CreateModel(
             name='member',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
                 ('user_name', models.CharField(blank=True, max_length=50)),
                 ('date_created', models.DateTimeField(auto_now=True)),
                 ('date_updated', models.DateTimeField(auto_now_add=True)),
@@ -55,7 +49,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Menu',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
                 ('title', models.CharField(max_length=50)),
                 ('item_picture', models.ImageField(blank=True, upload_to='')),
                 ('description', models.TextField()),
@@ -70,7 +64,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Recipe',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
                 ('title', models.CharField(max_length=50)),
                 ('item_picture', models.ImageField(blank=True, upload_to='')),
                 ('description', models.TextField()),
@@ -85,8 +79,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Kitchen',
             fields=[
-                ('kitchen_name', models.CharField(blank=True, max_length=50)),
-                ('owner', models.OneToOneField(serialize=False, primary_key=True, to='dishi_chef.Chef')),
+                ('kitchen_name', models.CharField(max_length=50)),
+                ('bussiness_type', models.CharField(choices=[('type_1', 'Start a Food Business'), ('tpye_2', 'Scale an existing food business'), ('type_3', 'Sell food in my spare time'), ('type_4', 'Offer cooking classes')], max_length=50)),
+                ('kitchen_type', models.CharField(choices=[('type_1', 'bakery'), ('type_2', 'cuisine'), ('type_3', 'African'), ('type_4', 'Other')], max_length=50)),
+                ('owner', models.OneToOneField(primary_key=True, to='dishi_chef.Chef', serialize=False)),
                 ('date_created', models.DateTimeField(auto_now=True)),
                 ('date_updated', models.DateTimeField(auto_now_add=True)),
             ],
@@ -100,7 +96,7 @@ class Migration(migrations.Migration):
             name='Team',
             fields=[
                 ('name', models.CharField(blank=True, max_length=50)),
-                ('kitchen', models.OneToOneField(serialize=False, primary_key=True, to='dishi_chef.Kitchen')),
+                ('kitchen', models.OneToOneField(primary_key=True, to='dishi_chef.Kitchen', serialize=False)),
                 ('date_created', models.DateTimeField(auto_now=True)),
                 ('date_updated', models.DateTimeField(auto_now_add=True)),
                 ('members', models.ManyToManyField(to='dishi_chef.member')),
@@ -115,15 +111,5 @@ class Migration(migrations.Migration):
             model_name='menu',
             name='owner',
             field=models.ForeignKey(to='dishi_chef.Kitchen'),
-        ),
-        migrations.AddField(
-            model_name='kitchen',
-            name='bussiness_types',
-            field=models.ManyToManyField(to='dishi_chef.business_types'),
-        ),
-        migrations.AddField(
-            model_name='kitchen',
-            name='kitchen_type',
-            field=models.ManyToManyField(to='dishi_chef.kitchen_types'),
         ),
     ]
