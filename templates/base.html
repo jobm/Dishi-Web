@@ -4,15 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <title>dishi</title>
-    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+
+   <link rel="stylesheet" href="{% static 'foundation/css/normalize.css' %}">
+   <link rel="stylesheet" href="{% static 'slider/vegas.min.css' %}">
+   <link rel="stylesheet" href="{% static 'foundation/foundation-icons/foundation-icons.css' %}">
+   <link rel="stylesheet" href="{% static 'foundation/css/foundation.min.css' %}">
+   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+   <link rel="stylesheet" href="{% static 'font/fonts.css' %}">
+   <link rel="stylesheet" href="{% static 'foundation/css/app.css' %}">
+
 </head>
 <body>
 
 {% block content %}
 
 {% endblock %}
+ {% block main %}{% endblock %}
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+<script type="text/javascript" src="{% static 'foundation/js/foundation.js'%}">
+
+</script>
 
 </body>
 </html>
