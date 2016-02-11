@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'registration',
     'dishi_chef',
     'dishi_auth',
+    'dishi_kitchen',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'Dishi_Web.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
