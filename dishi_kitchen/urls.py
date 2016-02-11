@@ -1,8 +1,8 @@
 from django.conf.urls import url, include
-from dishi_chef import views
+from dishi_kitchen import views
 
 
 # url for a kitchen
 urlpatterns = [
-    url(''),
+    url('^$', views.kitchen_home, name="kitchen"),
 ]

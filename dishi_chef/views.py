@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from dishi_chef.forms import KitchenForm, InviteForm
-from dishi_chef.models import Invite
+# from dishi_chef.forms import KitchenForm, InviteForm
+# from dishi_chef.models import Invite
 from django.core.mail import send_mail
 
 
@@ -10,13 +10,16 @@ def kitchen_home(request):
 
 
 # kitchen form view
+"""
 def kitchen_form_view(request):
     kitchen_form = KitchenForm(request.POST or None)
     context = {"kitchen_form": kitchen_form}
     return render(request, "kitchen_reg_form.html", context=context)
+"""
 
 
 # view to send an invite
+"""
 def invite_team(request):
     invite_form = InviteForm(request.POST or None)
     context = {}
@@ -40,3 +43,4 @@ def invite_team(request):
 def generate_url(str_token):
     url = "http://127.0.0.1:8000/dishi/accounts/"
     return "{}{}".format(url, str_token)
+"""
