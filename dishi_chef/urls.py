@@ -4,8 +4,7 @@ from dishi_chef import views
 
 # url for a kitchen
 urlpatterns = [
-    url(r'chef/$', views.kitchen_home, name='k_home'),
-
+    url(r'chef/$', views.kitchen_home, name='home'),
     url(r'chef/kitchen/', include('dishi_kitchen.urls',
         namespace='chef_kitchen')),
 

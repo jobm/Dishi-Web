@@ -35,10 +35,11 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
     'djrill',
+    'taggit',
     'crispy_forms',
     'crispy_forms_foundation',
     'registration',
@@ -56,6 +57,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.models.Session',
 )
 
 ROOT_URLCONF = 'Dishi_Web.urls'
@@ -113,10 +115,17 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = ('foundation-5')
+CRISPY_ALLOWED_TEMPLATE_PACKS = "foundation-5"
 CRISPY_TEMPLATE_PACK = 'foundation-5'
 
 # djrill email settings
 MANDRILL_API_KEY = MANDRILL_API_KEY
-EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+# EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 DEFAULT_FROM_EMAIL = "dishicommunity@gmail.com"
+
+# django registration settings
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+SITE_ID = 1
+LOGIN_REDIRECT_URL = "/"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

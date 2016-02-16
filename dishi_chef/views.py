@@ -1,46 +1,42 @@
 from django.shortcuts import render, redirect
 # from dishi_chef.forms import KitchenForm, InviteForm
-# from dishi_chef.models import Invite
+from dishi_chef.models import Chef
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
+from shared_files.dishi_user import get_object_or_none
+from dishi_chef.forms import ChefForm
+
+
+LOGIN_URL = "/auth/accounts/login/"
 
 
 # Create your views here.
+@login_required(login_url=LOGIN_URL)
 def kitchen_home(request):
-    return render(request, "kitchen.html")
+    # pre save the user partly
+    save_user_as_chef(request)
+    # check if the requesting user is an existing chef
+    chef = get_object_or_none(Chef, pk=request.user.pk)
+    # if not an existing chef render a form to save the rest of his info
+    if not chef.first_name:
+        chef_form = ChefForm()
+        return render(request, 'chef_reg_form.html',
+                      context={"chef_form": chef_form})
+    # if an existing chef redirect him to his profile page
+    return render(request, "chef_home.html", context={"chef": chef})
 
 
-# kitchen form view
-"""
-def kitchen_form_view(request):
-    kitchen_form = KitchenForm(request.POST or None)
-    context = {"kitchen_form": kitchen_form}
-    return render(request, "kitchen_reg_form.html", context=context)
-"""
+# save user as chef when they access the chef section
+def save_user_as_chef(request):
+    if not get_object_or_none(Chef, pk=request.user.pk):
+        chef = Chef()
+        chef.pk = request.user.pk
+        chef.id = request.user.id
+        chef.owner = request.user
+        chef.user_name = request.user.username
+        chef.email = request.user.email
+        chef.is_chef = True
+        chef.save()
+    else:
+        pass
 
-
-# view to send an invite
-"""
-def invite_team(request):
-    invite_form = InviteForm(request.POST or None)
-    context = {}
-    invite = Invite()
-    if request.method == 'POST':
-        if invite_form.is_valid():
-            email = invite_form.cleaned_data.get('recepient_email')
-            invite.recepient_email = email
-            invite.hash_token = invite.generate_unique_hash()
-            # invite.owner = request.user
-            # print(email, invite.hash_token, generate_url(invite.hash_token))
-            send_mail("Invite to team", generate_url(invite.hash_token),
-                      "EMail sender <jobmwaniki18@gmail.com>",
-                      [email])
-            invite.save()
-            return redirect('/dishi/chef/')
-    context = {"invite_form": invite_form}
-    return render(request, "invite.html", context=context)
-
-
-def generate_url(str_token):
-    url = "http://127.0.0.1:8000/dishi/accounts/"
-    return "{}{}".format(url, str_token)
-"""

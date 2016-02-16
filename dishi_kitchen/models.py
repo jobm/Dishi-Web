@@ -39,6 +39,8 @@ class Menu(Dish_Item):
 
 # model to create a recipe
 class Recipe(Dish_Item):
+    # comma separated field of instructions
+    ingredients = models.CharField(blank=True, max_length=1000)
     likes = models.IntegerField(blank=True,
                                 validators=[
                                     MinValueValidator(1),
@@ -74,6 +76,11 @@ class Team(models.Model):
     random token and ForeignKey to the chef's kitchen
     you send e-mail with a link with that token,
     then you look up the tokens in the view"""
+
+
+# kitchen post model
+class Post(models.Model):
+    pass
 
 
 # invite model
