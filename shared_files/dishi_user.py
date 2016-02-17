@@ -2,18 +2,18 @@ from django.db import models
 
 
 # shared user models
-class Dishi_User(models.Model):
-    user_name = models.CharField(max_length=50, blank=True)
+class DishiUser(models.Model):
+    username = models.CharField(max_length=50, blank=True)
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)
-    email_address = models.EmailField(max_length=50, blank=False)
+    email = models.EmailField(max_length=50, blank=False)
     profile_picture = models.ImageField(blank=True)
 
     class Meta:
         abstract = True
 
 
-class Dish_Item(models.Model):
+class DishItem(models.Model):
     title = models.CharField(max_length=50, blank=False)
     item_picture = models.ImageField(blank=True)
     description = models.TextField()
@@ -37,8 +37,9 @@ KITCHEN_TYPE_CHOICES = [
 
 
 # reused methods
+# this methods checks whether a model exists if it does its returned else it returns None
 def get_object_or_none(model, *args, **kwargs):
     try:
         return model.objects.get(*args, **kwargs)
-    except:
+    except models.ObjectDoesNotExist:
         return None

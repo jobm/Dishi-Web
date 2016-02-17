@@ -2,13 +2,12 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<form class="round_plain" action="" method="post">
+<form class="round_plain" action="{% url 'dishi_chef:save_reg_form'  %}" method="post">
     <div class="container">
         {% csrf_token %}
         {% crispy chef_form  %}
         <input type="submit" class="button submit orange-bg" value="Invite"/>
     </div>
-
 </form>
 
 {% endblock content%}

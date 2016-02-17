@@ -1,7 +1,7 @@
 from django.db import models
-import uuid as hash
+import uuid as h
 from dishi_chef.models import Chef
-from shared_files.dishi_user import (Dishi_User, Dish_Item,
+from shared_files.dishi_user import (DishiUser, DishItem,
                                      BUSSINES_TYPE_CHOICES,
                                      KITCHEN_TYPE_CHOICES,)
 from django.contrib.auth.models import User
@@ -28,7 +28,7 @@ class Kitchen(models.Model):
 
 
 # model to create Kitchens menu
-class Menu(Dish_Item):
+class Menu(DishItem):
     cost = models.FloatField(blank=False)
     """this field creates a relationship meaning that a kitchen can have many
     menus"""
@@ -38,7 +38,7 @@ class Menu(Dish_Item):
 
 
 # model to create a recipe
-class Recipe(Dish_Item):
+class Recipe(DishItem):
     # comma separated field of instructions
     ingredients = models.CharField(blank=True, max_length=1000)
     likes = models.IntegerField(blank=True,
@@ -54,7 +54,7 @@ class Recipe(Dish_Item):
 
 
 # this is field to createa a list of members
-class member(models.Model):
+class Member(models.Model):
     user_name = models.CharField(max_length=50, blank=True)
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
@@ -65,7 +65,7 @@ class Team(models.Model):
     name = models.CharField(max_length=50, blank=True)
     """this is a field to create multiple fields to store members user_names
     it relates to the "member" model above as a Many To Many relationship"""
-    members = models.ManyToManyField(member)
+    members = models.ManyToManyField(Member)
     """"this field creates a relationship to a kitchen identifying it as an
     onwerof a Team meaning one Kitchen one Team"""
     kitchen = models.OneToOneField(Kitchen, primary_key=True)
@@ -91,8 +91,7 @@ class Invite(models.Model):
 
     # method to generate unique token
     def generate_unique_hash(self):
-        return str(hash.uuid5(hash.NAMESPACE_URL, self.recepient_email))
-
+        return str(h.uuid5(hash.NAMESPACE_URL, self.recepient_email))
     # override save method
     # def save(self, *args, **kwargs):
     #     if not self.hash_token:

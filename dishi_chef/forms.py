@@ -7,4 +7,4 @@ from shared_files.dishi_user import BUSSINES_TYPE_CHOICES, KITCHEN_TYPE_CHOICES
 class ChefForm(forms.ModelForm):
     class Meta:
         model = Chef
-        fields = ['user_name', 'first_name', 'last_name', 'tags']
+        fields = ['username', 'email', 'first_name', 'last_name']

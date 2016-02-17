@@ -5,6 +5,7 @@ from dishi_chef import views
 # url for a kitchen
 urlpatterns = [
     url(r'chef/$', views.kitchen_home, name='home'),
+    url(r'chef/save_reg_form/$', views.save_chef_reg_form, name='save_reg_form'),
     url(r'chef/kitchen/', include('dishi_kitchen.urls',
         namespace='chef_kitchen')),
 
