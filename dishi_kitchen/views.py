@@ -1,9 +1,40 @@
 from django.shortcuts import render
+from dishi_kitchen.forms import RecipeForm, MenuForm, InviteForm
+from shared_files.dishi_user import get_object_or_none
+from dishi_kitchen.models import Menu,Recipe,Invite
 
 
+# url:  /dishi/chef/kitchen/
 # Create your views here.
-def kitchen_home(request):
+def kitchen_home(request, username):
     return render(request, "kitchen_layout.html")
+
+
+# view to render a form to add a menu item
+def kitchen_menu(request):
+    # menu_item = get_object_or_none(Menu, owner=request.user)
+    menu_form = MenuForm()
+    return render(request, "menu_add_form.html", context={"menu_form": menu_form})
+
+
+# view to add the menu item
+def add_kitchen_menu(request):
+    pass
+
+
+# view to render a form to add a recipe item
+def kitchen_recipe(request):
+    pass
+
+
+# view to add recipe item
+def add_kitchen_recipe(request):
+    pass
+
+
+# view to load the blog app
+def kitchen_blog(request):
+    pass
 
 
 # kitchen form view

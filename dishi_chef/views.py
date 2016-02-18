@@ -11,10 +11,11 @@ LOGIN_URL = "/auth/accounts/login/"
 
 
 # Create your views here.
+# url: /dishi/chef/ to access the chef profile
 @login_required(login_url=LOGIN_URL)
-def kitchen_home(request):
+def chef_home(request, username):
     # check if the requesting user is an existing chef
-    chef = get_object_or_none(Chef, pk=request.user.pk)
+    chef = get_object_or_none(Chef, username=request.user.username)
     # if not an existing chef render a form to save the rest of his info
     if not chef:
         chef_form = ChefForm(instance=request.user)
@@ -24,8 +25,9 @@ def kitchen_home(request):
     return render(request, "chef_home.html", context={"chef": chef})
 
 
+# this is the view function used to post a user to the database
+# url: /dishi/chef/save_chef_form
 def save_chef_reg_form(request):
-
     chef_form = ChefForm(request.POST or None)
     if request.method == 'POST':
         if chef_form.is_valid():
@@ -40,13 +42,15 @@ def save_chef_reg_form(request):
 
 
 # save user as chef when they access the chef section
-def save_user_as_chef(request):
-    if not get_object_or_none(Chef, pk=request.user.pk):
+# this is not a view function, its used to presave a user,
+# however the method is not in use, so ignore it.
+def save_user_as_chef(request_user):
+    if not get_object_or_none(Chef, pk=request_user.pk):
         chef = Chef()
-        chef.pk = request.user.pk
-        chef.id = request.user.id
-        chef.owner = request.user
-        chef.email_address = request.user.email
+        chef.pk = request_user.pk
+        chef.id = request_user.id
+        chef.owner = request_user.user
+        chef.email_address = request_user.email
         chef.is_chef = True
         chef.save()
     else:

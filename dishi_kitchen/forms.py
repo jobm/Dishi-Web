@@ -1,5 +1,5 @@
 from django import forms
-from .models import Kitchen, Invite, Menu
+from .models import Kitchen, Invite, Menu, Recipe
 from shared_files.dishi_user import BUSSINES_TYPE_CHOICES, KITCHEN_TYPE_CHOICES
 
 
@@ -31,7 +31,8 @@ class MenuForm(forms.ModelForm):
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        field = ["title", "item_picture", "description", "cost"]
+        field = ["title", "item_picture", "description"]
+        exclude = ["ingredients"]
 
 
 # this a form to invite a user to a kitchen
