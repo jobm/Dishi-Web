@@ -6,5 +6,4 @@ from dishi_chef import views
 urlpatterns = [
     url(r'^$', views.chef_home, name='home'),
     url(r'^save_reg_form/$', views.save_chef_reg_form, name='save_reg_form'),
-
 ]

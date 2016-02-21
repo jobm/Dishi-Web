@@ -14,7 +14,7 @@
             <button class="menu-icon" type="button" data-toggle></button>
                 <div class="title-bar-title">Menu</div>
               <div class="title-bar-right">
-                <a class="add-item" href={% url "kitchen:menu" %}><i class="fa fa-pencil-square fa-2x"></i></a>
+                <a class="add-item" href={% url "kitchen:menu" chef.username %}><span class="fa fa-pencil-square fa-2x"></span></a>
                 <a class="add-item"><i class="fa fa-search fa-2x"></i></a>
               </div>
           </div>
@@ -37,7 +37,7 @@
               <div class="top-bar-right">
                 <ul class="menu">
                     <li class="btn"><a class="button" href="#">Invite</a></li>
-                  <li><a class="add-item"><i class="fa fa-pencil-square fa-2x"></i></a></li>
+                  <li><a class="add-item" href={% url "kitchen:menu" chef.username %}><i class="fa fa-pencil-square fa-2x"></i></a></li>
                   <li><a class="add-item"><i class="fa fa-search fa-2x"></i></a></li>
                 </ul>
               </div>
