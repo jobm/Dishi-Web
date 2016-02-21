@@ -13,9 +13,9 @@ LOGIN_URL = "/auth/accounts/login/"
 # Create your views here.
 # url: /dishi/chef/ to access the chef profile
 @login_required(login_url=LOGIN_URL)
-def chef_home(request, username):
+def chef_home(request):
     # check if the requesting user is an existing chef
-    chef = get_object_or_none(Chef, username=request.user.username)
+    chef = get_object_or_none(Chef, pk=request.user.pk)
     # if not an existing chef render a form to save the rest of his info
     if not chef:
         chef_form = ChefForm(instance=request.user)

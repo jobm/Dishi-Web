@@ -2,7 +2,8 @@
 {% block content %}
 
     <h1>Chef Profile Here</h1>
-    <h3>{{ chef.user_name }}</h3>
-{#    <a href={% url "dishi_kitchen:kitchen_home" %}>kitchen</a>#}
+    <h3>{{ chef.username }}</h3>
+
+    <a href="/chef/kitchen/{{ chef.username }}">kitchen</a>
 
 {% endblock %}
