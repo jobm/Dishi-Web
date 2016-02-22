@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from dishi_chef.models import Chef
 from dishi_kitchen.models import Kitchen
 from dishi_kitchen.forms import RecipeForm, MenuForm, InviteForm, KitchenForm
-from shared_files.dishi_user import (get_object_or_none,
+from shared_files.dishi_user import (get_object_or_none,filter_object_or_none,
                                      BUSSINES_TYPE_CHOICES,
                                      KITCHEN_TYPE_CHOICES)
 from dishi_kitchen.models import Menu, Recipe, Invite
@@ -17,8 +17,9 @@ def kitchen_home(request, username):
         kitchen_form = KitchenForm()
         context = {"kitchen_form": kitchen_form, "chef": chef}
         return render(request, "kitchen_reg_form.html", context=context)
+    menus = filter_object_or_none(Menu, owner=kitchen)
     k_t, b_t = dict(KITCHEN_TYPE_CHOICES)[kitchen.kitchen_type], dict(BUSSINES_TYPE_CHOICES)[kitchen.business_type]
-    context = {"chef": chef, "kitchen": kitchen, "k_t": k_t, "b_t": b_t}
+    context = {"chef": chef, "kitchen": kitchen, "menus": menus, "k_t": k_t, "b_t": b_t}
     return render(request, "kitchen_layout.html", context=context)
 
 

@@ -43,3 +43,10 @@ def get_object_or_none(model, *args, **kwargs):
         return model.objects.get(*args, **kwargs)
     except models.ObjectDoesNotExist:
         return None
+
+
+def filter_object_or_none(model, *args, **kwargs):
+    try:
+        return model.objects.filter(*args, **kwargs)
+    except models.ObjectDoesNotExist:
+        return None
