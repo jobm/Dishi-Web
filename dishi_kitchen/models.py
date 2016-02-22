@@ -11,12 +11,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # model to create a Kitchen
 class Kitchen(models.Model):
     kitchen_name = models.CharField(max_length=50, blank=False)
-    bussiness_type = models.CharField(choices=BUSSINES_TYPE_CHOICES,
-                                      max_length=50,
-                                      blank=False)
-    kitchen_type = models.CharField(choices=KITCHEN_TYPE_CHOICES,
-                                    max_length=50,
-                                    blank=False)
+    business_type = models.CharField(max_length=50, blank=False)
+    kitchen_type = models.CharField(max_length=50, blank=False)
     """"this field creates a relationship to a chef identifying them as an
     onwer of a kitchen meaning one chef one kitchen"""
     owner = models.OneToOneField(Chef, primary_key=True)
@@ -54,33 +50,33 @@ class Recipe(DishItem):
 
 
 # this is field to createa a list of members
-class Member(models.Model):
-    user_name = models.CharField(max_length=50, blank=True)
-    date_created = models.DateTimeField(auto_now=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
+# class Member(models.Model):
+#     user_name = models.CharField(max_length=50, blank=True)
+#     date_created = models.DateTimeField(auto_now=True)
+#     date_updated = models.DateTimeField(auto_now_add=True)
 
 
 # model for a kitchens Team
-class Team(models.Model):
-    name = models.CharField(max_length=50, blank=True)
-    """this is a field to create multiple fields to store members user_names
-    it relates to the "member" model above as a Many To Many relationship"""
-    members = models.ManyToManyField(Member)
-    """"this field creates a relationship to a kitchen identifying it as an
-    onwerof a Team meaning one Kitchen one Team"""
-    kitchen = models.OneToOneField(Kitchen, primary_key=True)
-    date_created = models.DateTimeField(auto_now=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
-
-""" your invitation model should store a unique,
-    random token and ForeignKey to the chef's kitchen
-    you send e-mail with a link with that token,
-    then you look up the tokens in the view"""
+# class Team(models.Model):
+#     name = models.CharField(max_length=50, blank=True)
+#     """this is a field to create multiple fields to store members user_names
+#     it relates to the "member" model above as a Many To Many relationship"""
+#     members = models.ManyToManyField(Member)
+#     """"this field creates a relationship to a kitchen identifying it as an
+#     onwerof a Team meaning one Kitchen one Team"""
+#     kitchen = models.OneToOneField(Kitchen, primary_key=True)
+#     date_created = models.DateTimeField(auto_now=True)
+#     date_updated = models.DateTimeField(auto_now_add=True)
+#
+# """ your invitation model should store a unique,
+#     random token and ForeignKey to the chef's kitchen
+#     you send e-mail with a link with that token,
+#     then you look up the tokens in the view"""
 
 
 # kitchen post model
-class Post(models.Model):
-    pass
+# class Post(models.Model):
+#     pass
 
 
 # invite model

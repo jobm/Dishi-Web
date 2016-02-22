@@ -36,7 +36,7 @@ def save_chef_reg_form(request):
             # chef.is_chef = True
             chef.save()
             chef_form.save_m2m()
-            return redirect('/dishi/chef/')
+            return redirect('/chef/')
     return render(request, "chef_reg_form.html",
                   context={"chef_form": chef_form})
 

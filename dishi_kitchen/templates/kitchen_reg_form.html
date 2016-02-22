@@ -4,11 +4,10 @@
 <div id="inside-forms" class="row center-h">
   <div class="row form-row">
     <div class="round-plain">
-      <form action="" method="POST">
+      <form action="{% url "kitchen:create_kitchen" chef.username %}" method="POST">
         {% csrf_token %}
-        <!--{% crispy kitchen_form %}-->
         {{kitchen_form}}
-        <a href="#" class="button submit orange-bg">Submit</a>
+        <input class="button submit orange-bg" type="submit" value="save">
       </form>
     </div>
   </div>
