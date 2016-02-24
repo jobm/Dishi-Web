@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-{#     action="{% url "kitchen:add_menu" chef.username %}"#}
+
+<div class="row">
+    <br>
     <form action="{% url "kitchen:add_menu" chef.username %}" method="POST">
         {% csrf_token %}
         {{ menu_form }}
         <input class="button" type="submit" value="add menu">
     </form>
+    <br>
+</div>
+
 {% endblock %}

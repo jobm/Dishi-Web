@@ -79,11 +79,6 @@ def add_kitchen_recipe(request, username):
     return render(request, "menu_add_form.html", context={"menu_form": recipe_form})
 
 
-# view to load the blog app
-def kitchen_blog(request):
-    pass
-
-
 # create a kitchen form view
 """
 def kitchen_form_view(request):

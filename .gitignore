@@ -4,5 +4,7 @@
 *.pyc
 *.pyo
 /venv/
+/env/
+/dep_env/
 db.sqlite3
 /migrations/
