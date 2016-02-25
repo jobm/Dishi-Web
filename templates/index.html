@@ -1,1 +1,9 @@
-<h1>{{ user.username }}</h1>
+{% extends "base.html" %}
+{% block content %}
+    <br>
+    <div class="text-center">
+    <a class="button" href="{% url "dishi_chef:home" %}">get a kitchen</a>
+        <h1>{{ user.username }}</h1>
+    </div>
+{% endblock %}
+
