@@ -49,7 +49,11 @@ class Recipe(DishItem):
     date_updated = models.DateTimeField(auto_now_add=True)
 
 
-# this is field to createa a list of members
+# model to follow a kitchen
+#   class Followers(models.Model):
+#       pass
+
+# this is field to create a list of members
 # class Member(models.Model):
 #     user_name = models.CharField(max_length=50, blank=True)
 #     date_created = models.DateTimeField(auto_now=True)
