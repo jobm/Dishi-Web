@@ -9,13 +9,31 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 # model to create a Kitchen
+class Followers(models.Model):
+    follower = models.ForeignKey(User, blank=True)
+    date_followed = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.follower.username
+
+
+class Following(models.Model):
+    following = models.ForeignKey(User, blank=True)
+    date_following = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.following.username
+
+
 class Kitchen(models.Model):
     kitchen_name = models.CharField(max_length=50, blank=False)
     business_type = models.CharField(max_length=50, blank=False)
     kitchen_type = models.CharField(max_length=50, blank=False)
     """"this field creates a relationship to a chef identifying them as an
-    onwer of a kitchen meaning one chef one kitchen"""
+    owner of a kitchen meaning one chef one kitchen"""
     owner = models.OneToOneField(Chef, primary_key=True)
+    followers = models.ManyToManyField(Followers, related_name="kitchen_followers", symmetrical=False)
+    following = models.ManyToManyField(Following, related_name="kitchen_following", symmetrical=False)
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 
@@ -48,10 +66,6 @@ class Recipe(DishItem):
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 
-
-# model to follow a kitchen
-#   class Followers(models.Model):
-#       pass
 
 # this is field to create a list of members
 # class Member(models.Model):
@@ -86,12 +100,12 @@ class Recipe(DishItem):
 # invite model
 class Invite(models.Model):
     # owner = models.ForeignKey(User)
-    recepient_email = models.EmailField(blank=False)
+    recipient_email = models.EmailField(blank=False)
     hash_token = models.CharField(blank=False, unique=True, max_length=36)
 
     # method to generate unique token
     def generate_unique_hash(self):
-        return str(h.uuid5(hash.NAMESPACE_URL, self.recepient_email))
+        return str(h.uuid5(hash.NAMESPACE_URL, self.recipient_email))
     # override save method
     # def save(self, *args, **kwargs):
     #     if not self.hash_token:

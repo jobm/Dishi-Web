@@ -39,4 +39,4 @@ class RecipeForm(forms.ModelForm):
 class InviteForm(forms.ModelForm):
     class Meta:
         model = Invite
-        fields = ['recepient_email']
+        fields = ['recipient_email']

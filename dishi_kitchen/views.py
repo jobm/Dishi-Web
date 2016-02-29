@@ -79,6 +79,11 @@ def add_kitchen_recipe(request, username):
     return render(request, "menu_add_form.html", context={"menu_form": recipe_form})
 
 
+# view to follow a kitchen
+def follow_kitchen(request, username):
+    pass
+
+
 # create a kitchen form view
 """
 def kitchen_form_view(request):
