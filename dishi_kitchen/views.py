@@ -1,26 +1,57 @@
 from django.shortcuts import render, redirect
 from dishi_chef.models import Chef
-from dishi_kitchen.models import Kitchen
+from dishi_kitchen.models import Kitchen, Followers
 from dishi_kitchen.forms import RecipeForm, MenuForm, InviteForm, KitchenForm
-from shared_files.dishi_user import (get_object_or_none,filter_object_or_none,
+from shared_files.dishi_user import (get_object_or_none,
+                                     filter_object_or_none,
                                      BUSSINES_TYPE_CHOICES,
                                      KITCHEN_TYPE_CHOICES)
 from dishi_kitchen.models import Menu, Recipe, Invite
 
 
-# url:  /dishi/chef/kitchen/
+# url:/dishi/chef/kitchen/
 # Create your views here.
 def kitchen_home(request, username):
+    # check whether the person trying to access the kitchen is the owner of the username
+    # used to request for the kitchen, if not just render the kitchen of the requested chef.
+    # if the person requesting is the owner of the username, and they are a verified chef, create a
+    # kitchen for them
+    context = {}
     chef = get_object_or_none(Chef, username=username)
-    kitchen = get_object_or_none(Kitchen, owner_id=request.user.id)
-    if kitchen is None:
-        kitchen_form = KitchenForm()
-        context = {"kitchen_form": kitchen_form, "chef": chef}
-        return render(request, "kitchen_reg_form.html", context=context)
-    menus = filter_object_or_none(Menu, owner=kitchen)
-    k_t, b_t = dict(KITCHEN_TYPE_CHOICES)[kitchen.kitchen_type], dict(BUSSINES_TYPE_CHOICES)[kitchen.business_type]
-    context = {"chef": chef, "kitchen": kitchen, "menus": menus, "k_t": k_t, "b_t": b_t}
+    if request.user.username == username:
+        kitchen = get_object_or_none(Kitchen, owner=chef)
+        if kitchen is None:
+            kitchen_form = KitchenForm()
+            context = {"kitchen_form": kitchen_form, "chef": chef}
+            return render(request, "kitchen_reg_form.html", context=context)
+        else:
+            context = set_kitchen_context(chef)
+
+    else:
+        if chef is not None:
+            user = get_object_or_none(Followers, follower_id=request.user.id)
+            kitchen = get_object_or_none(Kitchen, owner=chef)
+            if kitchen is not None:
+                if user is None:
+                    context = set_kitchen_context(chef)
+                else:
+                    context = set_kitchen_context(chef, user)
     return render(request, "kitchen_layout.html", context=context)
+
+
+# this is not a view
+def set_kitchen_context(chef, *args):
+    kitchen = get_object_or_none(Kitchen, owner=chef)
+    menus = filter_object_or_none(Menu, owner=kitchen)
+    k_t = dict(KITCHEN_TYPE_CHOICES)[kitchen.kitchen_type]
+    b_t = dict(BUSSINES_TYPE_CHOICES)[kitchen.business_type]
+    context = {"chef": chef,
+               "kitchen": kitchen,
+               "menus": menus,
+               "k_t": k_t,
+               "b_t": b_t,
+               "user": args}
+    return context
 
 
 # kitchen save action
@@ -40,7 +71,7 @@ def create_kitchen(request, username):
 
 # view to render a form to add a menu item
 def kitchen_menu(request, username):
-    chef = get_object_or_none(Chef, pk=request.user.pk)
+    chef = get_object_or_none(Chef, username=username)
     menu_form = MenuForm()
     context = {"menu_form": menu_form, "chef": chef}
     return render(request, "menu_add_form.html", context=context)
@@ -81,16 +112,20 @@ def add_kitchen_recipe(request, username):
 
 # view to follow a kitchen
 def follow_kitchen(request, username):
-    pass
+    f = get_object_or_none(Followers, follower=request.user)
+    if f is None:
+        follower = Followers(follower=request.user)
+        follower.follower = request.user
+        follower.save()
+    return redirect("/kitchen/{}/".format(username))
 
 
-# create a kitchen form view
-"""
-def kitchen_form_view(request):
-    kitchen_form = KitchenForm(request.POST or None)
-    context = {"kitchen_form": kitchen_form}
-    return render(request, "kitchen_reg_form.html", context=context)
-"""
+# view to un follow a kitchen
+def unfollow_kitchen(request, username):
+    f = get_object_or_none(Followers, follower=request.user)
+    if f is not None:
+        f.delete()
+    return redirect("/kitchen/{}/".format(username))
 
 
 # view to send an invite

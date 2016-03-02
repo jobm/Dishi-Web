@@ -9,5 +9,7 @@ urlpatterns = [
     url('^(?P<username>[\w-]+)/recipe/$', views.kitchen_recipe, name="recipe"),
     url('^(?P<username>[\w-]+)/menu/create/$', views.add_kitchen_menu, name="add_menu"),
     url('^(?P<username>[\w-]+)/recipe/create/$', views.add_kitchen_recipe, name="add_recipe"),
-    url('^(?P<username>[\w-]+)/kitchen/create/$', views.create_kitchen, name="create_kitchen")
+    url('^(?P<username>[\w-]+)/kitchen/create/$', views.create_kitchen, name="create_kitchen"),
+    url('^(?P<username>[\w-]+)/kitchen/follow/$', views.follow_kitchen, name="follow"),
+    url('^(?P<username>[\w-]+)/kitchen/unfollow/$', views.unfollow_kitchen, name="unfollow"),
 ]

@@ -1,15 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<header class="header">
-        <!--<nav class="nav">
-            <ul>
-                <li><a href="#" class="top_nav">Link</a></li>
-                <li><a href="#" class="top_nav">Link</a></li>
-                <li><a href="#" class="top_nav">Link</a></li>
-                <li><a href="#" class="top_nav">Link</a></li>
-                <li><a href="#" class="top_nav">Link</a></li>
-            </ul>
-          </nav>-->
+    {% if not chef %}
+
+    {% else %}
+        <header class="header">
           <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
             <button class="menu-icon" type="button" data-toggle></button>
                 <div class="title-bar-title">Menu</div>
@@ -112,6 +106,19 @@
                                     <a class="button" href="#">Contact Us</a>
                                 </li>
                             </div>
+                            {{ user }}
+                            {% if not user %}
+                                <form action="{% url "kitchen:follow" chef.username %}" method="POST">
+                                    {% csrf_token %}
+                                    <input class="button" type="submit" value="follow us" >
+                                </form>
+                            {% else %}
+                                <form action="{% url "kitchen:unfollow" chef.username %}" method="POST">
+                                    {% csrf_token %}
+                                    <input class="button" type="submit" value="un follow" >
+                                </form>
+                            {% endif %}
+
                           </ul>
                     </nav>
                 </div>
@@ -143,32 +150,6 @@
             </div><!---expanded row end -->
           </div>
       </div>
-      </section>  <!---bottom section end ---->
-
-
-
-
-
-
-
-
-      <!--<section id="side__menu">
-
-          <nav class="side__nav">
-            <ul>
-                <li><a href="#" class="k-side_item">Name</a></li>
-                <li><a href="#" class="k-side_item">Kitchen type</a></li>
-                <li><a href="#" class="k-side_item">About</a></li>
-                <li><a href="#" class="k-side_item">Services</a></li>
-                <li><a href="#" class="k-side_item">Followers 200 | Following 150</a></li>
-                <li><a href="#" class="k-side_item">Ratings</a></li>
-              </ul>
-          </nav>
       </section>
-      <section id="kitchen__content">
-          <div class="card">
-            <div class="menu-pic">picture</div>
-            <div class="menu">Menu content</div>
-          </div>
-      </section>-->
+    {% endif %}
 {% endblock %}

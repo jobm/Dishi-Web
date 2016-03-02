@@ -38,11 +38,17 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third party apps
     'djrill',
-    'taggit',
     'crispy_forms',
     'crispy_forms_foundation',
     'registration',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.google',
+    # end of third party apps
     'dishi_chef',
     'dishi_auth',
     'dishi_kitchen',
