@@ -7,6 +7,7 @@ from shared_files.dishi_user import (get_object_or_none,
                                      BUSSINES_TYPE_CHOICES,
                                      KITCHEN_TYPE_CHOICES)
 from dishi_kitchen.models import Menu, Recipe, Invite
+from django.core.mail import send_mail
 
 
 # url:/dishi/chef/kitchen/
@@ -25,7 +26,7 @@ def kitchen_home(request, username):
             context = {"kitchen_form": kitchen_form, "chef": chef}
             return render(request, "kitchen_reg_form.html", context=context)
         else:
-            context = set_kitchen_context(chef)
+            context = set_kitchen_context(chef, str(username))
 
     else:
         if chef is not None:
@@ -113,7 +114,7 @@ def add_kitchen_recipe(request, username):
 # view to follow a kitchen
 def follow_kitchen(request, username):
     f = get_object_or_none(Followers, follower=request.user)
-    if f is None:
+    if f is None and request.user.username != username:
         follower = Followers(follower=request.user)
         follower.follower = request.user
         follower.save()
@@ -129,17 +130,16 @@ def unfollow_kitchen(request, username):
 
 
 # view to send an invite
-"""
-def invite_team(request):
+def invite_team(request, username):
     invite_form = InviteForm(request.POST or None)
-    context = {}
+    # context = {}
     invite = Invite()
     if request.method == 'POST':
         if invite_form.is_valid():
             email = invite_form.cleaned_data.get('recepient_email')
             invite.recepient_email = email
             invite.hash_token = invite.generate_unique_hash()
-            # invite.owner = request.user
+            invite.owner = request.user
             # print(email, invite.hash_token, generate_url(invite.hash_token))
             send_mail("Invite to team", generate_url(invite.hash_token),
                       "EMail sender <jobmwaniki18@gmail.com>",
@@ -153,4 +153,4 @@ def invite_team(request):
 def generate_url(str_token):
     url = "http://127.0.0.1:8000/dishi/accounts/"
     return "{}{}".format(url, str_token)
-"""
+

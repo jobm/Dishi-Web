@@ -106,19 +106,21 @@
                                     <a class="button" href="#">Contact Us</a>
                                 </li>
                             </div>
-                            {{ user }}
-                            {% if not user %}
-                                <form action="{% url "kitchen:follow" chef.username %}" method="POST">
-                                    {% csrf_token %}
-                                    <input class="button" type="submit" value="follow us" >
-                                </form>
-                            {% else %}
-                                <form action="{% url "kitchen:unfollow" chef.username %}" method="POST">
-                                    {% csrf_token %}
-                                    <input class="button" type="submit" value="un follow" >
-                                </form>
-                            {% endif %}
-
+                            {% for name in user %}
+                                {% if name != chef.username %}
+                                    {% if not user %}
+                                        <form action="{% url "kitchen:follow" chef.username %}" method="POST">
+                                            {% csrf_token %}
+                                            <input class="button" type="submit" value="follow us" >
+                                        </form>
+                                    {% else %}
+                                        <form action="{% url "kitchen:unfollow" chef.username %}" method="POST">
+                                            {% csrf_token %}
+                                            <input class="button" type="submit" value="un follow" >
+                                        </form>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
                           </ul>
                     </nav>
                 </div>
