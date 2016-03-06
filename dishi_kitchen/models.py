@@ -1,11 +1,10 @@
 from django.db import models
 import uuid as h
+from shared_files.dishi_user import DishiUser, DishItem, Following
 from dishi_chef.models import Chef
-from shared_files.dishi_user import (DishiUser, DishItem,
-                                     BUSSINES_TYPE_CHOICES,
-                                     KITCHEN_TYPE_CHOICES,)
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
+from tinymce.models import HTMLField
 
 
 # model to create a Kitchen
@@ -17,18 +16,19 @@ class Followers(models.Model):
         return self.follower.username
 
 
-class Following(models.Model):
-    following = models.ForeignKey(User, blank=True)
-    date_following = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.following.username
+# class Following(models.Model):
+#     following = models.ForeignKey(Kitchen, blank=True)
+#     date_following = models.DateTimeField(auto_now=True)
+#
+#     def __str__(self):
+#         return self.following.username
 
 
 class Kitchen(models.Model):
     kitchen_name = models.CharField(max_length=50, blank=False)
     business_type = models.CharField(max_length=50, blank=False)
     kitchen_type = models.CharField(max_length=50, blank=False)
+    about_kitchen = HTMLField()
     """"this field creates a relationship to a chef identifying them as an
     owner of a kitchen meaning one chef one kitchen"""
     owner = models.OneToOneField(Chef, primary_key=True)
@@ -105,7 +105,7 @@ class Invite(models.Model):
 
     # method to generate unique token
     def generate_unique_hash(self):
-        return str(h.uuid5(hash.NAMESPACE_URL, self.recipient_email))
+        return str(h.uuid5(h.NAMESPACE_URL, self.recipient_email))
     # override save method
     # def save(self, *args, **kwargs):
     #     if not self.hash_token:

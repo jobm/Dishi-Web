@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -38,20 +37,16 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dishi_chef',
+    'dishi_auth',
+    'dishi_kitchen',
     # third party apps
     'djrill',
     'crispy_forms',
     'crispy_forms_foundation',
     'registration',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.facebook',
-    # 'allauth.socialaccount.providers.google',
-    # end of third party apps
-    'dishi_chef',
-    'dishi_auth',
-    'dishi_kitchen',
+    'tinymce',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -112,7 +107,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
+# Static files (CcSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
@@ -127,7 +122,7 @@ CRISPY_TEMPLATE_PACK = 'foundation-5'
 # djrill email settings
 MANDRILL_API_KEY = MANDRILL_API_KEY
 # EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
-DEFAULT_FROM_EMAIL = "dishicommunity@gmail.com"
+DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
 
 # django registration settings
 ACCOUNT_ACTIVATION_DAYS = 7

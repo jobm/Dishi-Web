@@ -8,3 +8,4 @@
 /dep_env/
 db.sqlite3
 /migrations/
+/dishi_env/

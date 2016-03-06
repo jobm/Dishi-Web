@@ -1,6 +1,6 @@
 from django import forms
 from .models import Kitchen, Invite, Menu, Recipe
-from shared_files.dishi_user import BUSSINES_TYPE_CHOICES, KITCHEN_TYPE_CHOICES
+from shared_files.dishi_user import BUSINESS_TYPE_CHOICES, KITCHEN_TYPE_CHOICES
 
 
 # this form should only have about three fields for now
@@ -12,7 +12,7 @@ class KitchenForm(forms.ModelForm):
 
     business_type = forms.ChoiceField(
         label="What kind of kitchen do you need?",
-        choices=BUSSINES_TYPE_CHOICES, widget=forms.RadioSelect(
+        choices=BUSINESS_TYPE_CHOICES, widget=forms.RadioSelect(
         ))
 
     kitchen_type = forms.ChoiceField(

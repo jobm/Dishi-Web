@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from dishi_chef.models import Chef
-from dishi_kitchen.models import Kitchen, Followers
+from dishi_kitchen.models import Kitchen, Followers, Following
 from dishi_kitchen.forms import RecipeForm, MenuForm, InviteForm, KitchenForm
 from shared_files.dishi_user import (get_object_or_none,
                                      filter_object_or_none,
-                                     BUSSINES_TYPE_CHOICES,
+                                     BUSINESS_TYPE_CHOICES,
                                      KITCHEN_TYPE_CHOICES)
 from dishi_kitchen.models import Menu, Recipe, Invite
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
 
 
 # url:/dishi/chef/kitchen/
@@ -45,7 +45,7 @@ def set_kitchen_context(chef, *args):
     kitchen = get_object_or_none(Kitchen, owner=chef)
     menus = filter_object_or_none(Menu, owner=kitchen)
     k_t = dict(KITCHEN_TYPE_CHOICES)[kitchen.kitchen_type]
-    b_t = dict(BUSSINES_TYPE_CHOICES)[kitchen.business_type]
+    b_t = dict(BUSINESS_TYPE_CHOICES)[kitchen.business_type]
     context = {"chef": chef,
                "kitchen": kitchen,
                "menus": menus,
@@ -113,12 +113,32 @@ def add_kitchen_recipe(request, username):
 
 # view to follow a kitchen
 def follow_kitchen(request, username):
-    f = get_object_or_none(Followers, follower=request.user)
-    if f is None and request.user.username != username:
+    # get the list of follower/follower of a kitchen
+    follower = get_object_or_none(Followers, follower=request.user)
+    # retrieve a chef with the username that is being requested
+    chef = get_object_or_none(Chef, username=username)
+    # retrieve a kitchen owned by the chef being requested via username
+    kitchen = get_object_or_none(Kitchen, owner=chef)
+    # check if the kitchen retrieved is in the followers' list
+    # following = get_object_or_none(Following, following=kitchen)
+    # check if the follower/followers list has the person trying to follow the kitchen
+    # then check if the person requesting the kitchen is the owner
+    if follower is None and request.user.username != username:
+        # initialize/create the follower, add the user then save them
         follower = Followers(follower=request.user)
         follower.follower = request.user
         follower.save()
+        # then check if the kitchen is already added in the users following
+        # if following is None:
+        following_kitchen_list(kitchen)
     return redirect("/kitchen/{}/".format(username))
+
+
+# add a kitchen to list of favorite kitchens
+def following_kitchen_list(kitchen):
+    following = Following(following=kitchen)
+    following.following = kitchen
+    following.save()
 
 
 # view to un follow a kitchen
@@ -130,27 +150,27 @@ def unfollow_kitchen(request, username):
 
 
 # view to send an invite
-def invite_team(request, username):
-    invite_form = InviteForm(request.POST or None)
-    # context = {}
-    invite = Invite()
-    if request.method == 'POST':
-        if invite_form.is_valid():
-            email = invite_form.cleaned_data.get('recepient_email')
-            invite.recepient_email = email
-            invite.hash_token = invite.generate_unique_hash()
-            invite.owner = request.user
-            # print(email, invite.hash_token, generate_url(invite.hash_token))
-            send_mail("Invite to team", generate_url(invite.hash_token),
-                      "EMail sender <jobmwaniki18@gmail.com>",
-                      [email])
-            invite.save()
-            return redirect('/dishi/chef/')
-    context = {"invite_form": invite_form}
-    return render(request, "invite.html", context=context)
-
-
-def generate_url(str_token):
-    url = "http://127.0.0.1:8000/dishi/accounts/"
-    return "{}{}".format(url, str_token)
+# def invite_team(request, username):
+#     invite_form = InviteForm(request.POST or None)
+#     # context = {}
+#     invite = Invite()
+#     if request.method == 'POST':
+#         if invite_form.is_valid():
+#             email = invite_form.cleaned_data.get('recipient_email')
+#             invite.recipient_email = email
+#             invite.hash_token = invite.generate_unique_hash()
+#             invite.owner = request.user
+#             # print(email, invite.hash_token, generate_url(invite.hash_token))
+#             send_mail("Invite to team", generate_url(invite.hash_token),
+#                       "EMail sender <jobmwaniki18@gmail.com>",
+#                       [email])
+#             invite.save()
+#             return redirect('/chef/{}/'.format(username))
+#     context = {"invite_form": invite_form}
+#     return render(request, "invite.html", context=context)
+#
+#
+# def generate_url(str_token):
+#     url = "http://127.0.0.1:8000/dishi/accounts/"
+#     return "{}{}".format(url, str_token)
 
