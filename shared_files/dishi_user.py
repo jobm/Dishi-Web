@@ -1,26 +1,13 @@
 from django.db import models
-from dishi_kitchen.models import Kitchen
 
 
 # shared user models
-class Following(models.Model):
-    following = models.ForeignKey(Kitchen, blank=True)
-    date_following = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.following.username
-
-    class Meta:
-        abstract = True
-
-
 class DishiUser(models.Model):
     username = models.CharField(max_length=50, blank=True)
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)
     email = models.EmailField(max_length=50, blank=False)
     profile_picture = models.ImageField(blank=True)
-    following = models.ManyToManyField(Following, related_name="kitchen_following", symmetrical=False)
 
     class Meta:
         abstract = True

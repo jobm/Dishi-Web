@@ -4,7 +4,7 @@ Django==1.9.4
 django-allauth==0.24.1
 django-crispy-forms==1.6.0
 django-registration-redux==1.4
-django-tinymce==2.2.0
+django-summernote==0.8.2
 djrill==2.0
 oauthlib==1.0.3
 Pillow==3.1.1
@@ -13,4 +13,3 @@ python3-openid==3.0.9
 requests==2.9.1
 requests-oauthlib==0.6.1
 six==1.10.0
-wheel==0.29.0

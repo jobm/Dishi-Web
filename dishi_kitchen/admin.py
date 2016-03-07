@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Kitchen, Recipe, Menu, Followers
+from dishi_kitchen.models import Kitchen, Recipe, Menu, Followers
 
 # Register your models here.
 admin.site.register(Kitchen)

@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^chef/', include('dishi_chef.urls', namespace='dishi_chef')),
     url(r'^kitchen/', include('dishi_kitchen.urls', namespace="kitchen")),
     url(r'^admin/', include(admin.site.urls)),
-    # url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^summernote/', include('django_summernote.urls')),
 ]

@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from shared_files.config import *
+from shared_files.dishi_config import *
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -45,7 +45,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'crispy_forms_foundation',
     'registration',
-    'tinymce',
+    'django_summernote',
 
 )
 
@@ -130,3 +130,9 @@ REGISTRATION_AUTO_LOGIN = True
 SITE_ID = 1
 LOGIN_REDIRECT_URL = "/"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# django summernote settings
+SUMMERNOTE_CONFIG = {
+    'width': '100%',
+    'height': '250px',
+}
