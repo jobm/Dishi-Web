@@ -93,7 +93,7 @@ def add_kitchen_menu(request, username):
 
 # view to render a form to add a recipe item
 def kitchen_recipe(request, username):
-    recipe_form = Recipe()
+    recipe_form = RecipeForm()
     context = {"recipe_form": recipe_form, "username": username}
     return render(request, "recipe_add_form.html", context=context)
 
@@ -146,7 +146,7 @@ def invite_team(request, username):
             invite.owner = request.user
             # print(email, invite.hash_token, generate_url(invite.hash_token))
             send_mail("Invite to team", generate_url(invite.hash_token),
-                      "EMail sender <jobmwaniki18@gmail.com>",
+                      "EMail sender <dishicommunity@gmail.com>",
                       [email])
             invite.save()
             return redirect('/chef/{}/'.format(username))

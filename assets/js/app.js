@@ -1,3 +1,7 @@
 $(function(){
-  $('body').foundation();
+    $('body').foundation();
+    $('#id_ingredients').tagsInput({
+        'height':'auto',
+        'width':'100%'
+    });
 });

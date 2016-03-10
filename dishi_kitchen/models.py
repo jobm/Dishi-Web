@@ -44,7 +44,7 @@ class Menu(DishItem):
 # model to create a recipe
 class Recipe(DishItem):
     # comma separated field of instructions
-    ingredients = models.CharField(blank=True, max_length=1000)
+    ingredients = models.TextField(blank=True)
     likes = models.IntegerField(blank=True,
                                 validators=[
                                     MinValueValidator(1),
