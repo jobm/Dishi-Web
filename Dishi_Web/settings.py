@@ -44,9 +44,14 @@ INSTALLED_APPS = (
     'djrill',
     'crispy_forms',
     'crispy_forms_foundation',
-    'registration',
     'django_summernote',
-
+    'allauth',
+    # allauth accounts'
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.twitter',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -74,10 +79,18 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `all auth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `all auth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
 
 WSGI_APPLICATION = 'Dishi_Web.wsgi.application'
 
@@ -125,14 +138,49 @@ MANDRILL_API_KEY = MANDRILL_API_KEY
 DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
 
 # django registration settings
-ACCOUNT_ACTIVATION_DAYS = 7
-REGISTRATION_AUTO_LOGIN = True
-SITE_ID = 1
-LOGIN_REDIRECT_URL = "/"
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# ACCOUNT_ACTIVATION_DAYS = 7
+# REGISTRATION_AUTO_LOGIN = True
+# SITE_ID = 1
+# LOGIN_REDIRECT_URL = "/"
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # django summernote settings
 SUMMERNOTE_CONFIG = {
     'width': '100%',
     'height': '250px',
 }
+
+
+# django all-auth settings
+LOGIN_REDIRECT_URL = '/'
+SOCIALACCOUNT_QUERY_EMAIL = True
+
+SOCIALACCOUNT_PROVIDERS = \
+    {
+        'facebook': {
+            'SCOPE': ['email'],
+              'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+              'METHOD': 'oauth2',
+              'LOCALE_FUNC': 'path.to.callable'}
+    }
+SITE_ID = 3
+
+SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_ACTIVATION_DAYS = 7
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = True
+EMAIL_CONFIRMATION_SIGNUP = True
+ACCOUNT_EMAIL_REQUIRED = True
+LOGIN_REDIRECT_URL = '/accounts/profile/'
+LOGOUT_URL = '/'
+
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+SOCIALACCOUNT_QUERY_EMAIL = ACCOUNT_EMAIL_REQUIRED
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_AVATAR_SUPPORT = ('avatar' in INSTALLED_APPS)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

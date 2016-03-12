@@ -3,7 +3,6 @@ defusedxml==0.4.1
 Django==1.9.4
 django-allauth==0.24.1
 django-crispy-forms==1.6.0
-django-registration-redux==1.4
 django-summernote==0.8.2
 djrill==2.0
 oauthlib==1.0.3
