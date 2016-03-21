@@ -37,7 +37,7 @@ h5 {
 .submit, .invite {
     width: 80px;
     margin-left: 45px;
-    font-size: 1.rem;
+    font-size: 1rem;
 }
 
 /*=========================================================================== */
@@ -60,6 +60,6 @@ h5 {
     .submit, .invite {
         width: 80px;
         margin-left: 232px;
-        font-size: 1.rem;
+        font-size: 1rem;
     }
 }

@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'crispy_forms_foundation',
     'django_summernote',
+    'storages',
     'allauth',
     # allauth accounts'
     'allauth.account',
@@ -137,19 +138,12 @@ MANDRILL_API_KEY = MANDRILL_API_KEY
 # EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
 
-# django registration settings
-# ACCOUNT_ACTIVATION_DAYS = 7
-# REGISTRATION_AUTO_LOGIN = True
-# SITE_ID = 1
-# LOGIN_REDIRECT_URL = "/"
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # django summernote settings
 SUMMERNOTE_CONFIG = {
     'width': '100%',
     'height': '250px',
 }
-
 
 # django all-auth settings
 LOGIN_REDIRECT_URL = '/'
@@ -163,7 +157,7 @@ SOCIALACCOUNT_PROVIDERS = \
               'METHOD': 'oauth2',
               'LOCALE_FUNC': 'path.to.callable'}
     }
-SITE_ID = 3
+SITE_ID = 4
 
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -184,3 +178,7 @@ SOCIALACCOUNT_QUERY_EMAIL = ACCOUNT_EMAIL_REQUIRED
 SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_AVATAR_SUPPORT = ('avatar' in INSTALLED_APPS)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# comments xtd settings
+# COMMENTS_APP = "django_comments_xtd"
+# COMMENTS_XTD_CONFIRM_EMAIL = True

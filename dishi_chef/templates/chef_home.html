@@ -4,6 +4,6 @@
     <h1>Chef Profile Here</h1>
     <h3>{{ chef.username }}</h3>
 
-    <a href="/kitchen/{{ chef.username }}">kitchen</a>
+    <a href="{% url 'dishi_chef:kitchen:home' chef.username %}">kitchen</a>
 
 {% endblock %}

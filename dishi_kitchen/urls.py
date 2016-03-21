@@ -4,12 +4,12 @@ from dishi_kitchen import views
 
 # url for a kitchen
 urlpatterns = [
-    url('^(?P<username>[\w-]+)/$', views.kitchen_home, name="kitchen"),
-    url('^(?P<username>[\w-]+)/menu/$', views.kitchen_menu, name="menu"),
-    url('^(?P<username>[\w-]+)/recipe/$', views.kitchen_recipe, name="recipe"),
-    url('^(?P<username>[\w-]+)/menu/create/$', views.add_kitchen_menu, name="add_menu"),
-    url('^(?P<username>[\w-]+)/recipe/create/$', views.add_kitchen_recipe, name="add_recipe"),
-    url('^(?P<username>[\w-]+)/kitchen/create/$', views.create_kitchen, name="create_kitchen"),
-    url('^(?P<username>[\w-]+)/kitchen/follow/$', views.follow_kitchen, name="follow"),
-    url('^(?P<username>[\w-]+)/kitchen/unfollow/$', views.unfollow_kitchen, name="unfollow"),
+    url(r'^(?P<username>[\w-]+)/$', views.kitchen_home, name="home"),
+    url(r'^(?P<username>[\w-]+)/menu/$', views.kitchen_menu, name="menu"),
+    url(r'^(?P<username>[\w-]+)/recipe/$', views.kitchen_recipe, name="recipe"),
+    url(r'^(?P<username>[\w-]+)/menu/create/$', views.add_kitchen_menu, name="add_menu"),
+    url(r'^(?P<username>[\w-]+)/recipe/create/$', views.add_kitchen_recipe, name="add_recipe"),
+    url(r'^(?P<username>[\w-]+)/kitchen/create/$', views.create_kitchen, name="create_kitchen"),
+    url(r'^(?P<username>[\w-]+)/kitchen/follow/$', views.follow_kitchen, name="follow"),
+    url(r'^(?P<username>[\w-]+)/kitchen/unfollow/$', views.unfollow_kitchen, name="unfollow"),
 ]

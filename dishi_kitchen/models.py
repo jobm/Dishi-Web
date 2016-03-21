@@ -7,7 +7,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 # model to create a Kitchen
-class Followers(models.Model):
+class Follower(models.Model):
     follower = models.ForeignKey(User, blank=True)
     date_followed = models.DateTimeField(auto_now=True)
 
@@ -20,15 +20,42 @@ class Kitchen(models.Model):
     business_type = models.CharField(max_length=50, blank=False)
     kitchen_type = models.CharField(max_length=50, blank=False)
     about_kitchen = models.TextField(verbose_name="kitchen description")
+    cover_image = models.ImageField(blank=True)
+    phone_number = models.CharField(max_length=20, blank=True, default="+xxx-xxx-xxx-xxx")
+    logo = models.ImageField(blank=True)
+    secondary_email = models.EmailField(blank=True, default="example@example.com")
     """"this field creates a relationship to a chef identifying them as an
     owner of a kitchen meaning one chef one kitchen"""
     owner = models.OneToOneField(Chef, primary_key=True)
-    followers = models.ManyToManyField(Followers, related_name="kitchen_followers", symmetrical=False)
+    followers = models.ManyToManyField(Follower,
+                                       related_name="kitchen_follower",
+                                       symmetrical=False)
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.kitchen_name
+
+
+# model to hold the comments of a conversation
+class Comment(models.Model):
+    comment = models.TextField()
+    commenter = models.ForeignKey(User, blank=True)
+    date_created = models.DateTimeField(auto_now=True)
+    date_updated = models.DateTimeField(auto_now_add=True)
+
+
+# model to create a kitchen's conversation
+class Conversation(models.Model):
+    title = models.CharField(max_length=50, blank=False)
+    post = models.TextField()
+    publisher = models.CharField(max_length=50, blank=False)
+    comments = models.ManyToManyField(Comment,
+                                      related_name="kitchen_comment",
+                                      symmetrical=False)
+    owner = models.ForeignKey(Kitchen)
+    date_created = models.DateTimeField(auto_now=True)
+    date_updated = models.DateTimeField(auto_now_add=True)
 
 
 # model to create Kitchens menu
@@ -66,8 +93,3 @@ class Invite(models.Model):
     # method to generate unique token
     def generate_unique_hash(self):
         return str(h.uuid5(h.NAMESPACE_URL, self.recipient_email))
-    # override save method
-    # def save(self, *args, **kwargs):
-    #     if not self.hash_token:
-    #         self.hash_token = self.generate_unique_hash()
-    #     super(self, Invite).save(*arg, **kwargs)

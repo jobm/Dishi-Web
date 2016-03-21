@@ -15,7 +15,8 @@ LOGIN_URL = "/auth/accounts/login/"
 @login_required(login_url=LOGIN_URL)
 def chef_home(request):
     # check if the requesting user is an existing chef
-    chef = get_object_or_none(Chef, pk=request.user.pk)
+    chef = get_object_or_none(Chef, owner_id=request.user.id)
+    print(chef)
     # if not an existing chef render a form to save the rest of his info
     if not chef:
         chef_form = ChefForm(instance=request.user)

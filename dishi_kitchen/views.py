@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from dishi_chef.models import Chef
-from dishi_kitchen.models import Kitchen, Followers
+from dishi_kitchen.models import Kitchen, Follower
 from dishi_kitchen.forms import RecipeForm, MenuForm, InviteForm, KitchenForm
 from shared_files.dishi_user import (get_object_or_none,
                                      filter_object_or_none,
@@ -114,12 +114,12 @@ def add_kitchen_recipe(request, username):
 # view to follow a kitchen
 def follow_kitchen(request, username):
     # get the list of follower/follower of a kitchen
-    follower = get_object_or_none(Followers, follower=request.user)
+    follower = get_object_or_none(Follower, follower=request.user)
     # check if the follower/followers list has the person trying to follow the kitchen
     # then check if the person requesting the kitchen is the owner
     if follower is None and request.user.username != username:
         # initialize/create the follower, add the user then save them
-        follower = Followers(follower=request.user)
+        follower = Follower(follower=request.user)
         follower.follower = request.user
         follower.save()
     return redirect("/kitchen/{}/".format(username))
@@ -127,7 +127,7 @@ def follow_kitchen(request, username):
 
 # view to un follow a kitchen
 def unfollow_kitchen(request, username):
-    f = get_object_or_none(Followers, follower=request.user)
+    f = get_object_or_none(Follower, follower=request.user)
     if f is not None:
         f.delete()
     return redirect("/kitchen/{}/".format(username))
@@ -158,3 +158,22 @@ def generate_url(str_token):
     url = "http://127.0.0.1:8000/dishi/accounts/"
     return "{}{}".format(url, str_token)
 
+
+# view to add a post to the kitchen by displaying a post form
+def create_a_conversation(request, username):
+    pass
+
+
+# view to save the post
+def save_a_conversation(request, username):
+    pass
+
+
+# view to edit a post
+def edit_a_conversation(request, username):
+    pass
+
+
+# view to delete a post
+def delete_a_conversation(request, username):
+    pass
