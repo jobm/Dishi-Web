@@ -45,6 +45,14 @@ class Comment(models.Model):
     date_updated = models.DateTimeField(auto_now_add=True)
 
 
+# model to hold the like of a conversation
+class Like(models.Model):
+    like = models.IntegerField()
+    liker = models.ForeignKey(User, blank=True)
+    date_created = models.DateTimeField(auto_now=True)
+    date_updated = models.DateTimeField(auto_now_add=True)
+
+
 # model to create a kitchen's conversation
 class Conversation(models.Model):
     title = models.CharField(max_length=50, blank=False)
@@ -53,6 +61,9 @@ class Conversation(models.Model):
     comments = models.ManyToManyField(Comment,
                                       related_name="kitchen_comment",
                                       symmetrical=False)
+    likes = models.ManyToManyField(Like,
+                                  related_name="kitchen_like",
+                                  symmetrical=False)
     owner = models.ForeignKey(Kitchen)
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
