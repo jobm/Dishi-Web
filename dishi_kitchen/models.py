@@ -1,7 +1,7 @@
 from django.db import models
 import uuid as h
 from dishi_chef.models import Chef
-from shared_files.dishi_user import DishItem
+from shared_files.dishi_user import DishItem, Like, Comment
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 
@@ -38,33 +38,40 @@ class Kitchen(models.Model):
 
 
 # model to hold the comments of a conversation
-class Comment(models.Model):
-    comment = models.TextField()
-    commenter = models.ForeignKey(User, blank=True)
+class ConversationComment(Comment):
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 
 
 # model to hold the like of a conversation
-class Like(models.Model):
-    like = models.IntegerField()
-    liker = models.ForeignKey(User, blank=True)
+class ConversationLike(Like):
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 
 
 # model to create a kitchen's conversation
 class Conversation(models.Model):
-    title = models.CharField(max_length=50, blank=False)
     post = models.TextField()
-    publisher = models.CharField(max_length=50, blank=False)
-    comments = models.ManyToManyField(Comment,
+    comments = models.ManyToManyField(ConversationComment,
                                       related_name="kitchen_comment",
                                       symmetrical=False)
-    likes = models.ManyToManyField(Like,
-                                  related_name="kitchen_like",
-                                  symmetrical=False)
+    likes = models.ManyToManyField(ConversationLike,
+                                   related_name="conversation_like",
+                                   symmetrical=False)
     owner = models.ForeignKey(Kitchen)
+    date_created = models.DateTimeField(auto_now=True)
+    date_updated = models.DateTimeField(auto_now_add=True)
+
+
+# models to store Menu likes and comments
+# Menu likes model
+class MenuLike(Like):
+    date_created = models.DateTimeField(auto_now=True)
+    date_updated = models.DateTimeField(auto_now_add=True)
+
+
+# Menu comments model
+class MenuComment(Comment):
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 
@@ -72,9 +79,33 @@ class Conversation(models.Model):
 # model to create Kitchens menu
 class Menu(DishItem):
     cost = models.FloatField(blank=False)
+    plates = models.IntegerField(default=1, blank=False,
+                                 validators=[
+                                    MinValueValidator(1),
+                                    MaxValueValidator(50)
+                                 ])
+    comments = models.ManyToManyField(MenuComment,
+                                      related_name="menu_comment",
+                                      symmetrical=False)
+    likes = models.ManyToManyField(MenuLike,
+                                   related_name="menu_like",
+                                   symmetrical=False)
     """this field creates a relationship meaning that a kitchen can have many
     menus"""
     owner = models.ForeignKey(Kitchen)
+    date_created = models.DateTimeField(auto_now=True)
+    date_updated = models.DateTimeField(auto_now_add=True)
+
+
+# models to store Recipe likes and comments
+# Menu likes model
+class RecipeLike(Like):
+    date_created = models.DateTimeField(auto_now=True)
+    date_updated = models.DateTimeField(auto_now_add=True)
+
+
+# Menu comments model
+class RecipeComment(Comment):
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 
@@ -83,12 +114,14 @@ class Menu(DishItem):
 class Recipe(DishItem):
     # comma separated field of instructions
     ingredients = models.TextField(blank=True)
-    likes = models.IntegerField(blank=True,
-                                validators=[
-                                    MinValueValidator(1),
-                                    MaxValueValidator(50)
-                                ])
-    """this field creates a relationship meaning that a kithen can create many
+    likes = models.IntegerField(blank=True)
+    comments = models.ManyToManyField(RecipeComment,
+                                      related_name="recipe_comment",
+                                      symmetrical=False)
+    likes = models.ManyToManyField(RecipeLike,
+                                   related_name="recipe_like",
+                                   symmetrical=False)
+    """this field creates a relationship meaning that a kitchen can create many
     recipes"""
     owner = models.ForeignKey(Kitchen)
     date_created = models.DateTimeField(auto_now=True)

@@ -15,7 +15,7 @@ from django.core.mail import send_mail
 def kitchen_home(request, username):
     # check whether the person trying to access the kitchen is the owner of the username
     # used to request for the kitchen, if not just render the kitchen of the requested chef.
-    # if the person requesting is the owner of the username, and they are a verified chef, create a
+    # if the person requesting is the owner of the username, and they are a verified chef,          # create a
     # kitchen for them
     context = {}
     chef = get_object_or_none(Chef, username=username)
@@ -113,7 +113,7 @@ def add_kitchen_recipe(request, username):
 
 # view to follow a kitchen
 def follow_kitchen(request, username):
-    # get the list of follower/follower of a kitchen
+    # get the list of follower/followers of a kitchen
     follower = get_object_or_none(Follower, follower=request.user)
     # check if the follower/followers list has the person trying to follow the kitchen
     # then check if the person requesting the kitchen is the owner

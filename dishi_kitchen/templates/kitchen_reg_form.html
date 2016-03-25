@@ -4,7 +4,7 @@
 <div id="inside-forms" class="row center-h">
   <div class="row form-row">
     <div class="round-plain">
-      <form action="{% url "kitchen:create_kitchen" chef.username %}" method="POST">
+      <form action="{% url "dishi_chef:kitchen:create_kitchen" chef.username %}" method="POST">
         {% csrf_token %}
         {{kitchen_form}}
         <input class="button submit orange-bg" type="submit" value="save">

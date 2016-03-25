@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # shared user models
@@ -20,6 +21,23 @@ class DishItem(models.Model):
 
     class Meta:
         abstract = True
+
+
+class Like(models.Model):
+    like = models.IntegerField()
+    liker = models.ForeignKey(User, blank=True)
+
+    class Meta:
+        abstract = True
+
+
+class Comment(models.Model):
+    comment = models.TextField()
+    commenter = models.ForeignKey(User, blank=True)
+
+    class Meta:
+        abstract = True
+
 
 # this fields are use for the multi-select/choice fields of the chef model
 BUSINESS_TYPE_CHOICES = [

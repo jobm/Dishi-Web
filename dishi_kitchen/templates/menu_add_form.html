@@ -4,7 +4,7 @@
 
 <div class="row">
     <br>
-    <form action="{% url "kitchen:add_menu" chef.username %}" method="POST">
+    <form action="{% url "dishi_chef:kitchen:add_menu" chef.username %}" method="POST">
         {% csrf_token %}
         {{ menu_form }}
         <input class="button" type="submit" value="add menu">
