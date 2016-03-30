@@ -1,391 +1,473 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="row main">
-      <!-------Top level navigation------->
-      <header class="header">
-          <!--mobile menu-->
-          <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
-            <button class="menu-icon" type="button" data-toggle></button>
-                <div class="title-bar-title">Menu</div>
-              <div class="title-bar-right">
-                <a class="add-item" href="#animatedModal"><i class="fa fa-pencil-square fa-2x"></i></a>
-                <a class="search-item"><i class="fa fa-search fa-2x"></i></a>
-              </div>
-          </div>
-        <!--   Visible menu        -->
-          <div class="top-bar" id="example-menu">
-              <div class="top-bar-left">
-                <ul class="dropdown vertical medium-horizontal menu" data-dropdown-menu>
-                  <li class="menu-text">
-                      DISHI
-                  </li>
-                  <li>
-                    <a href="#">Recommended</a>
-                  </li>
-                  <li><a href="#">Chefs</a></li>
-                  <li><a href="#">Kitchens</a></li>
-                </ul>
-              </div>
-              <div class="top-bar-right">
-                <ul class="menu">
-                  <li><a class="search-item" href="#"><i class="fa fa-search fa-lg"></i></a></li>
-                  <li><a class="add-item" href="#animatedModal"><i class="fa fa-pencil-square fa-2x"></i></a></li>
-                  <li class="btn"><a class="button inv" href="#">Invite</a></li>
-                </ul>
-              </div>
-          </div>
-      </header>
-      <!--modal-->
-        <div id="animatedModal">
-        <!--THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID  class="close-animatedModal" -->
-            <div class="row">
-                <div id="btn-close-modal"class="close-animatedModal">
-                    <i class="fa fa-times fa-lg">close</i>
-                </div>
-            </div>
-        <div class="modal-content">
-                  <!--Your modal content goes here-->
-          <div class="row">
-            <div class="small-12 columns">
-                <div class="small-4 columns">
+
+<div class="row main">
+    {% if not chef %}
+       <h3>Under construction</h3>
+    {% else %}
+    <!--Add item modal-->
+    <div class="reveal" data-animation-in="fade-in" data-animation-out=
+    "fade-out" data-close-on-click="true" data-reveal="" id="addItemModal">
+        <!--modal content goes here-->
+        <div class="add-item-links">
+            <ul>
+                <li class="addDish">
                     <div class="modalIcon">
-                        <i class="fa fa-paper-plane-o fa-4x"></i><br><p>Add Menu</p>
+                        <img src="img/icons/dishicon.png" width="80"><br>
+                        <p>Add a Dish</p>
                     </div>
-                </div>
-                <div class="small-4 columns">
+                </li>
+                <li class="addRecipe">
                     <div class="modalIcon">
-                        <i class="fa fa-paper-plane-o fa-4x"></i><br><p>Add recipe</p>
+                        <i class="fa fa-cutlery fa-4x"></i><br>
+                        <p>Add a Recipe</p>
                     </div>
-                </div>
-                <div class="small-4 columns">
+                </li>
+                <li class="addPost">
                     <div class="modalIcon">
-                        <i class="fa fa-paper-plane-o fa-4x"></i><br><p>Post to community</p>
+                        <i class="fa fa-paper-plane-o fa-4x"></i><br>
+                        <p>Add a post</p>
                     </div>
-                </div>
+                </li>
+            </ul>
+        </div><!--Forms content -->
+        <div class="form-addItem-holder">
+            <div class="add form-addDish">
+                <h4>Add Dish</h4>
+                <form class="form-h dish-form">
+                    <div class="form-closeIcon">
+                        <i class="fa fa-times fa-1x"></i>
+                    </div>
+                    <div class="row">
+                        <div class="medium-12 columns">
+                            <input placeholder="Dish name" type="text">
+                            <input placeholder="Description" type="text">
+                            <label class="text-right middle" for=
+                            "middle-label">Price <input type="number"></label>
+                            <label class="text-right middle" for=
+                            "middle-label">Plates available <input type=
+                            "number" value="0"></label>
+                            <textarea placeholder="Ingredients"></textarea>
+                            <label class="button" for="exampleFileUpload">Add
+                            photo of dish</label> <input class="show-for-sr"
+                            id="exampleFileUpload" type="file">
+                        </div>
+                        <div class="medium-6 columns">
+                            <button class="button" type="submit">Add to
+                            menu</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-      </div>
-        </div>
-        </div>
-      <!------- Banner -------->
-      <section id="kitchen__banner">
-          <div class="image-banner holder">
-            <img class="banner" src="img/kitchen-banner1.jpg">
-
-          </div>
-      </section>
-      <section id="kitchen__menu">
-          <div class="row">
-            <div class="large-12 small-12 medium-12 columns">
-              <div class="small-2 medium-2 large-2 columns">
-                    <div id="kitchen__logo">
-                        <img src="img/kitchen-logo.jpg"/>
-                  </div>
-                </div>
-              <div id="kitchen_menu_list" class="small-10 medium-10 large-10  columns">
-                  <nav class="k-inner__nav">
-                    <ul class="tabs" data-tabs id="example-tabs">
-                        <li class="tabs-title is-active"><a href="#panel1" aria-selected="true" class="k-Fmenuinner_item">
-                            <span class="k-link">Dishes <span class="badge" id="messageCount">6</span></span><br>
-
-                            </a></li>
-                        <li class="tabs-title"><a href="#panel2" class="k-inner_item">
-                            <span class="k-link">Recipes <span class="badge" id="messageCount">5</span></span><br>
-                            <!--<span class="k-link-value">5</span>-->
-                            </a></li>
-                        <li class="tabs-title"><a href="#panel3" class="k-inner_item">
-                            <span class="k-link">Conversations <span class="badge" id="messageCount">5</span></span><br>
-                            <!--<span class="k-link-value">10</span>-->
-                            </a></li>
-                        <li class="tabs-title"><a href="#panel4" class="k-inner_item">
-                                <span class="k-link">Watchers <span class="badge" id="messageCount">19</span></span><br>
-                          <!--  <span class="k-link-value">14</span>-->
-                            </a></li>
-                        <li class="tabs-title"><a href="#panel5" class="k-inner_item">
-                            <span class="k-link">Testimonials <span class="badge" id="messageCount">19</span></span><br>
-
-                            </a></li>
-
-                      </ul>
-
-                  </nav>
-
-            </div><!--menu-list end-->
-          </div>
-        </div><!--row end-->
-
-      </section>
-      <section id="kitchen-contents">
-        <div class="row">
-            <div class="small-3 medium-3 large-3 columns styled-grid">
-                <div class="kitchen-about">
-                    <h3>Amanda's Kitchen</h3>
-                    <h4>Bakery</h4>
-                    <p>Amanda's kitchen is a bakery store. Find the best cakes in Nairobi.</p>
-                    <div class="kitchen-data follow">
-                        <a href="#" class=" button">
-                            <span class="icon"><i class="fa fa-plus"></i></span>
-                            <span class="icon-text ">Follow</span>
-                        </a>
+            <div class="add form-addRecipe">
+                <h4>Add Recipe</h4>
+                <form class="form-h recipe-form">
+                    <div class="form-closeIcon">
+                        <i class="fa fa-times fa-1x"></i>
                     </div>
-                    <div class="kitchen-data">
-                        <span class="icon"><i class="fa fa-cutlery fa-lg"></i></span>
-                        <span class="icon-text testimonials">Services</span>
+                    <div class="row">
+                        <div class="medium-12 columns">
+                            <textarea placeholder="Recipe name"></textarea>
+                            <textarea placeholder="Description" rows=
+                            "2"></textarea>
+                            <textarea placeholder="Ingredients" rows=
+                            "2"></textarea>
+                            <textarea placeholder="How to prepare"></textarea>
+                            <textarea placeholder="About Recipe"></textarea>
+                            <label class="button" for="exampleFileUpload">Add
+                            photo of dish</label> <input class="show-for-sr"
+                            id="exampleFileUpload" type="file">
+                        </div>
+                        <div class="medium-6 columns end">
+                            <button class="button" type="submit">Add to
+                            recipes</button>
+                        </div>
                     </div>
-                    <div class="kitchen-data">
-                        <span class="icon"><i class="fa fa-truck fa-lg"></i></span>
-                        <span class="icon-text testimonials">Delivery Areas</span>
-                    </div>
-                    <div class="kitchen-data">
-                        <span class="icon"><i class="fa fa-usd fa-lg"></i></span>
-                        <span class="icon-text testimonials">Sales</span>
-                    </div>
-                    <div class="kitchen-data"><!--settings-->
-                        <span class="icon"><i class="fa fa-cog fa-lg"></i></span>
-                        <span class="icon-text testimonials">Settings</span>
-                    </div>
-                    <div class="kitchen-data"><!--website-->
-                        <span class="icon"><i class="fa fa-link fa-lg"></i></span>
-                        <a href="#"><span class="icon-text testimonials">website</span></a>
-                    </div>
-
-                    <div class="contact-btn">
-                        <span class="icon"><i class="fa fa-phone fa-lg"></i></span>
-                        <span class="icon-text contacts">django_here, django_here</span>
-                        <span class="icon-text contacts">django_here</span>
-
-                    </div>
-                </div>
+                </form>
             </div>
-            <div class="small-9 medium-9 large-9 columns">
-                <div class="expanded row" id="row">
-                   <div class="large-12 columns">
-                     <div class="tabs-content" data-tabs-content="example-tabs">
-                            <div class="tabs-panel is-active" id="panel1">
-                                <!--<div class="row">-->
-                                    <!--<div id="kitchen_content" class="small-12 medium-12 large-12 columns">-->
-                                    <!--<div class="large-12 columns">-->
-                                     <ul id="container" class="kitchen-card-list">
-                                        <li class="kitchen-card-item">
-                                            <div id="card1" class="card">
-                                                <div class="menu-pic"><img src="img/recipe.jpg"/>Photo</div>
-                                                <div class="item menu-title ">Muffins<br></div>
-                                                <div class="item description">
-                                                    <p>Chococalte chipped muffins with nuts</p>
-                                                </div>
-                                               <!-- <div class="price">Ksh. 200</div>-->
-                                                <div class="item order-detail">
-                                                    <h3>django here</h3>
-                                                    <a href="#" class="order button">Order</a>
-                                                </div>
-                                            </div></li>
-                                        <li>
-                                            <div id="card2" class="card">
-                                                <div class="menu-pic"><img src="img/recipe1.jpg"/></div>
-                                                <div class="menu-details">Chocolate cake<br></div>
-                                            </div>
-                                         </li>
-                                         <li>
-                                            <div id="card1" class="card">
-                                                <div class="menu-pic"><img src="img/recipe.jpg"/></div>
-                                                <div class="menu-details">Muffins<br></div>
-                                            </div>
-                                         </li>
-                                         <li>
-                                            <div id="card2" class="card">
-                                                <div class="menu-pic"><img src="img/recipe1.jpg"/></div>
-                                                <div class="menu-details">Chocolate cake<br></div>
-                                            </div>
-                                         </li>
-                                         <li>
-                                            <div id="card3" class="card">
-                                                <div class="menu-pic"><img src="img/recipe3.jpg"/></div>
-                                                <div class="menu-details">Cheese cake<br></div>
-                                            </div>
-                                         </li>
-                                     </ul>
-                                        <!--<div id="card4" class="small-6 medium-4 large-4 columns card">
-                                            <div class="menu-pic"><img src="img/recipe4.jpg"/></div>
-                                            <div class="menu-details">Menu details<br></div>
-                                        </div>-->
-                     <!--</div>-->
-                                     <!--</div>--> <!---kitchen content end ---->
-                                <!--</div> -->
+            <div class="add form-addPost">
+                <h4>New post</h4>
+                <form class="form-h post-form">
+                    <div class="form-closeIcon">
+                        <i class="fa fa-times fa-1x"></i>
+                    </div>
+                    <div class="row">
+                        <div class="medium-12 columns">
+                            <textarea placeholder="What's cooking" rows=
+                            "5"></textarea>
+                            <div class="medium-6 columns">
+                                <label class="button" for=
+                                "exampleFileUpload">Add photo of dish</label>
+                                <input class="show-for-sr" id=
+                                "exampleFileUpload" type="file">
                             </div>
-                        <div class="tabs-panel" id="panel2">
-                          <p>Suspendisse dictum feugiat nisl ut dapibus.  Vivamus hendrerit arcu sed erat molestie vehicula. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.  Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
+                            <div class="medium-6 columns">
+                                <button class="button" type=
+                                "submit">Share</button>
+                            </div>
                         </div>
-                        <div class="tabs-panel" id="panel3">
-                          <p>All your conversations will appear here</p>
-                        </div>
-                        <div class="tabs-panel" id="panel4">
-                          <p>Start cooking and sharing your dishes to get more followers!</p>
-                        </div>
-                        <div class="tabs-panel" id="panel5">
-                          <p>People who love your food are likely to support you.</p>
-                        </div>
-
-                        </div><!--tabs content holder-->
-                   </div>
+                    </div>
+                </form>
+            </div>
+        </div><button aria-label="Close reveal" class="close-button"
+        data-close="" type="button"><span aria-hidden=
+        "true">&times;</span></button>
+    </div>
+    <div class="reveal" data-animation-in="fade-in" data-animation-out=
+    "fade-out" data-close-on-click="true" data-reveal="" id="inviteModal">
+        <input placeholder="Enter email" type="email"> <button aria-label=
+        "Close reveal" class="close-button" data-close="" type=
+        "button"><span aria-hidden="true">&times;</span></button>
+    </div><!--===== Banner ======-->
+    <section id="kitchen__banner">
+        <div class="image-banner holder"><img class="banner" src=
+        "img/kitchen-banner1.jpg"></div>
+    </section>
+    <section id="kitchen__menu">
+        <div class="row">
+            <div class="large-12 small-12 medium-12 columns">
+                <div class="small-2 medium-1 large-3 columns">
+                    <div id="kitchen__logo"><img src=
+                    "img/kitchen-logo.jpg"></div>
+                </div>
+                <div class="small-12 medium-11 large-9 columns" id=
+                "kitchen_menu_list">
+                    <nav class="k-inner__nav">
+                        <ul class="tabs" data-tabs="" id="example-tabs">
+                            <li class="tabs-title is-active">
+                                <a aria-selected="true" class=
+                                "k-Fmenuinner_item" href="#dishes"><span class=
+                                "k-link">Dishes <span class="badge" id=
+                                "messageCount">6</span></span><br></a>
+                            </li>
+                            <li class="tabs-title">
+                                <a class="k-inner_item" href=
+                                "#recipes"><span class=
+                                "k-link">Recipes<span class="badge" id=
+                                "messageCount">5</span></span><br>
+                                <!--<span class="k-link-value">5</span>--></a>
+                            </li>
+                            <li class="tabs-title">
+                                <a class="k-inner_item" href=
+                                "#conversations"><span class=
+                                "k-link">Conversations<span class="badge" id=
+                                "messageCount">5</span></span><br>
+                                <!--<span class="k-link-value">10</span>--></a>
+                            </li>
+                            <li class="tabs-title">
+                                <a class="k-inner_item" href=
+                                "#followers"><span class=
+                                "k-link">Watchers<span class="badge" id=
+                                "messageCount">19</span></span><br>
+                                <!--  <span class="k-link-value">14</span>--></a>
+                            </li>
+                            <li class="tabs-title">
+                                <a class="k-inner_item" href=
+                                "#testimonials"><span class=
+                                "k-link">Testimonials<span class="badge" id=
+                                "messageCount">19</span></span><br></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div><!--menu-list end-->
+            </div>
+        </div><!--row end-->
+    </section>
+    <section id="mobile-about">
+        <div class="row">
+            <div class="small-12 columns">
+                <div class="kitchen-about mobile">
+                    <h5>{{ kitchen.kitchen_name }}</h5>
+                    <h6>{{ kitchen_type }}</h6>
+                    <p>{{ kitchen.about_kitchen }}</p>
+                    <div class="kitchen-data follow">
+                        <a class=" button" href="#"><span class=
+                        "icon"><i class="fa fa-plus"></i></span> <span class=
+                        "icon-text">Follow</span></a>
+                    </div>
                 </div>
             </div>
         </div>
-      </section>
-    </div>
+    </section>
+    <section id="kitchen-contents">
+        <div class="row">
+            <div class="small-3 medium-4 large-3 columns styled-grid">
+                <div class="kitchen-about">
+                    <h5>{{ kitchen.kitchen_name }}</h5>
+                    <h6>{{ kitchen_type }}</h6>
+                    {{ kitchen.about_kitchen }}
+                    <div class="kitchen-data follow">
+                        <a class=" button" href="#"><span class=
+                        "icon"><i class="fa fa-plus"></i></span> <span class=
+                        "icon-text">Follow</span></a>
+                    </div>
+                    <div class="kitchen-data">
+                        <span class="icon"><i class=
+                        "fa fa-cutlery fa-lg"></i></span> <span class=
+                        "icon-text testimonials">Services</span>
+                    </div>
+                    <div class="kitchen-data">
+                        <span class="icon"><i class=
+                        "fa fa-truck fa-lg"></i></span> <span class=
+                        "icon-text testimonials">Delivery Areas</span>
+                    </div>
+                    <div class="kitchen-data">
+                        <!--website-->
+                        <span class="icon"><i class=
+                        "fa fa-link fa-lg"></i></span> <a href="#"><span class=
+                        "icon-text testimonials">website</span></a>
+                    </div>
+                    <div class="contact-btn">
+                        <span class="icon"><i class=
+                        "fa fa-phone fa-lg"></i></span> <span class=
+                        "icon-text contacts"><i>0722 421 999</i>,<i>0734 982
+                        115</i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="small-9 medium-8 large-9 columns">
+                <div class="expanded row" id="row">
+                    <div class="large-12 columns">
+                        <div class="tabs-content" data-tabs-content=
+                        "example-tabs">
+                            <div class="tabs-panel is-active" id="dishes">
+                                <ul class="kitchen-card-list" id="container">
+
+                                {% if dishes %}
+                                    {% for dish in dishes  %}
+                                        <li>
+                                        <div class="card-kitchen">
+                                            <div class="card-dishPicture">
+                                                <figure>
+                                                    <img alt="Dish" src="img/recipe5.jpg">
+                                                    <figcaption>
+                                                        <p><strong>{{ dish.cost }}</strong></p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class=
+                                            "card-dishContent card-contentPadding">
+                                            <i></i>
+                                                <h5 class=
+                                                "card-contentHeading">
+                                                <i><strong>{{ dish.title }}
+                                                rolls</strong></i></h5>
+                                                <p><i>{{ dish.description }}</i></p>
+                                                <p class="plates-order">Plates
+                                                remaining: 27/50</p><a class=
+                                                "button plates-order" href=
+                                                "#">Order now</a>
+                                            </div>
+                                            <hr>
+                                            <div class="card-chefDetails">
+                                                <div class="card-chefImage">
+                                                </div><span class=
+                                                "card-chefLink"><a href="#">
+                                                <h5><span class=
+                                                "card-chefLink">By: Chef
+                                                Amanda</span></h5></a></span>
+                                            </div>
+                                            <div class="card-dishRatings">
+                                                <div class=
+                                                "ratings card-likes">
+                                                    <a href="#"><i class=
+                                                    "fa fa-heart-o"></i><span class="likes-counter counter">300</span></a>
+                                                </div>
+                                                <div class=
+                                                "ratings card-comments">
+                                                    <a href="#"><i class=
+                                                    "fa fa-comment-o"></i><span class="comments-counter counter">300</span></a>
+                                                </div>
+                                                <div class=
+                                                "ratings card-orders">
+                                                    <a href="#"><i class=
+                                                    "fa fa-bookmark-o"></i><span class="dishes-counter counter">300</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                {% else %}
+                                    <h2> no menus added yet</h2>
+                                {% endif %}
+                                </ul>
+
+                            </div>
+
+
+
+                            <div class="tabs-panel" id="recipes">
+                                <ul class="kitchen-card-list" id="container">
+                                    <li class="kitchen-card-item">
+                                        <div class="card-kitchen">
+                                            <div class="card-dishPicture">
+                                                <figure>
+                                                    <img alt="Dish" src=
+                                                    "img/recipe.jpg">
+                                                    <!--<figcaption>
+                                                            <p><strong>Ksh 200</strong></p>
+                                                        </figcaption>-->
+                                                </figure>
+                                                <div class=
+                                                "card-recipeDetails">
+                                                    <figcaption class=
+                                                    "recipeDescription">
+                                                        <i></i>
+                                                        <h5 class=
+                                                        "card-contentHeading">
+                                                        <i><strong>Apple
+                                                        pie</strong></i></h5>
+                                                        <p><i>Mouth watering
+                                                        dish made wih a touch
+                                                        of honey,fresh apples
+                                                        and mint to give an
+                                                        exotic taste you will
+                                                        never forget</i></p>
+                                                    </figcaption>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="card-chefDetails">
+                                                <div class="card-chefImage">
+                                                </div><span class=
+                                                "card-chefLink"><a href="#">
+                                                <h5><span class=
+                                                "card-chefLink">By: Chef
+                                                Amanda</span></h5></a></span>
+                                            </div>
+                                            <div class="card-dishRatings">
+                                                <div class=
+                                                "ratings card-likes">
+                                                    <a href="#"><i class=
+                                                    "fa fa-heart-o"></i><span class="likes-counter counter">121</span></a>
+                                                </div>
+                                                <div class=
+                                                "ratings card-comments">
+                                                    <a href="#"><i class=
+                                                    "fa fa-comment-o"></i><span class="comments-counter counter">78</span></a>
+                                                </div>
+                                                <div class=
+                                                "ratings card-orders">
+                                                    <a href="#"><i class=
+                                                    "fa fa-bookmark-o"></i><span class="dishes-counter counter">68</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tabs-panel" id="conversations">
+                                <ul class="kitchen-card-list" id="container">
+                                    <li>
+                                        <div class="card-kitchen">
+                                            <div class="card-dishPicture">
+                                                <figure>
+                                                    <img alt="Dish" src=
+                                                    "img/recipe.jpg">
+                                                    <!--<figcaption> remake with absolte positioning
+                                                        <p><strong>Ksh 200</strong></p>
+                                                    </figcaption>-->
+                                                </figure>
+                                            </div>
+                                            <div class=
+                                            "card-conversatoinContent card-contentPadding">
+                                            <i></i>
+                                                <p><i>Hey guys, I was excited
+                                                to try out one of Amanda's new
+                                                cakes.I would recommend you to
+                                                check it out :D</i></p>
+                                                <!--<a class="conversation-linktoorder">Follow link to order</a>-->
+                                            </div>
+                                            <hr>
+                                            <div class="card-chefDetails">
+                                                <div class="card-chefImage">
+                                                </div><span class=
+                                                "card-chefLink"><a href="#">
+                                                <h5><span class=
+                                                "card-chefLink">By: Chef
+                                                Amanda</span></h5></a></span>
+                                            </div>
+                                            <div class="card-dishRatings">
+                                                <div class=
+                                                "ratings card-likes">
+                                                    <a href="#"><i class=
+                                                    "fa fa-heart-o"></i><span class="likes-counter counter">70</span></a>
+                                                </div>
+                                                <div class=
+                                                "ratings card-comments">
+                                                    <a href="#"><i class=
+                                                    "fa fa-comment-o"></i><span class="comments-counter counter">46</span></a>
+                                                </div>
+                                                <!--<div class="ratings card-orders">
+                                              <a href="#"><i class="fa fa-bookmark-o"></i><span class="dishes-counter counter">50</span></a>
+                                        </div>-->
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tabs-panel" id="followers">
+                                <ul class="kitchen-card-list watch-list" id=
+                                "container">
+                                    <li class="kitchen-card-item watch-list">
+                                        <div class="watcher-pictureHolder">
+                                            <div class="watcher-picture"></div>
+                                        </div>
+                                        <div class="watcher-nameHolder">
+                                            <div class="watcher-name">
+                                                <p>David Mosie</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tabs-panel" id="testimonials">
+                                <ul class="kitchen-card-list" id="container">
+                                    <li class="kitchen-card-item">
+                                        <div class="card-kitchen">
+                                            <div class="card-kitchenName">
+                                                <div class="card-kitchenImage">
+                                                </div><span class=
+                                                "card-kitchenImageDetails"><a class="card-kitchen-link"
+                                                href="#">
+                                                <h6 class="details">
+                                                <span class="card-kitchenImageDetails">
+                                                <strong>Amanda's
+                                                Kitchen</strong></span></h6></a></span>
+                                                <p class="details"><span class=
+                                                "card-kitchenImageDetails">Food
+                                                made with love</span></p>
+                                            </div>
+                                            <div class=
+                                            "card-testimonialContent card-contentPadding">
+                                            <i></i>
+                                                <p><i>This kitchen makes one of
+                                                the tastiest cakes, I love
+                                                it!!</i></p>
+                                            </div>
+                                            <hr>
+                                            <div class="card-dishRatings">
+                                                <div class=
+                                                "ratings card-likes">
+                                                    <a href="#"><i class=
+                                                    "fa fa-heart-o"></i><span class="likes-counter counter">132</span></a>
+                                                </div>
+                                                <div class=
+                                                "ratings card-comments">
+                                                    <a href="#"><i class=
+                                                    "fa fa-comment-o"></i><span class="comments-counter counter">113</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div><!--tabs content holder-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+    {% endif %}
 {% endblock %}
-{#{% extends "base.html" %}#}
-{#{% block content %}#}
-{#    {% if not chef %}#}
-{##}
-{#    {% else %}#}
-{#        <header class="header">#}
-{#          <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">#}
-{#            <button class="menu-icon" type="button" data-toggle></button>#}
-{#                <div class="title-bar-title">Menu</div>#}
-{#              <div class="title-bar-right">#}
-{#                <a class="add-item" href={% url "kitchen:menu" chef.username %}><span class="fa fa-pencil-square fa-2x"></span></a>#}
-{#                <a class="add-item"><i class="fa fa-search fa-2x"></i></a>#}
-{#              </div>#}
-{#          </div>#}
-{#          <div class="top-bar" id="example-menu">#}
-{#              <div class="top-bar-left">#}
-{#                <ul class="dropdown menu" data-dropdown-menu>#}
-{#                  <li class="menu-text">DISHI</li>#}
-{#                  <li>#}
-{#                    <a href="#">One</a>#}
-{#                    <ul class="menu vertical">#}
-{#                      <li><a href="#">One</a></li>#}
-{#                      <li><a href="#">Two</a></li>#}
-{#                      <li><a href="#">Three</a></li>#}
-{#                    </ul>#}
-{#                  </li>#}
-{#                  <li><a href="#">Two</a></li>#}
-{#                  <li><a href="#">Three</a></li>#}
-{#                </ul>#}
-{#              </div>#}
-{#              <div class="top-bar-right">#}
-{#                <ul class="menu">#}
-{#                    <li class="btn"><a class="button" href="#">Invite</a></li>#}
-{#                  <li><a class="add-item" href={% url "kitchen:menu" chef.username %}><i class="fa fa-pencil-square fa-2x"></i></a></li>#}
-{#                  <li><a class="add-item"><i class="fa fa-search fa-2x"></i></a></li>#}
-{#                </ul>#}
-{#              </div>#}
-{#          </div>#}
-{#      </header>#}
-{##}
-{#      <!------- Banner -------->#}
-{#      <section id="kitchen__banner">#}
-{#          <div class="image-banner holder">#}
-{#            <img class="banner" src="img/dive-slide11.jpg">#}
-{#<!--#}
-{#              <div class="row">#}
-{#                <div class="small-12 columns">#}
-{#                    <div class="small-3 columns">BANNER TEXT</div>needs review#}
-{#                </div>#}
-{#              </div>#}
-{#-->#}
-{#          </div>#}
-{##}
-{#          <div class="kitchen__details detail"><!--needs review-->#}
-{#              <div class="row">#}
-{#                  <h3>{{ kitchen.kitchen_name }} </h3>#}
-{#                  <h4>{{ k_t }}</h4>#}
-{#              </div>#}
-{#          </div>#}
-{#      </section>#}
-{##}
-{##}
-{#    <!------- Kitchen Details-------->#}
-{#      <!-- Kitchen Menu -->#}
-{#      <section id="kitchen__menu">#}
-{#          <!-- The Logo/Photo -->#}
-{#          <div class="expanded row">#}
-{#              <div class="small-12 medium-12 large-2 columns">#}
-{#                  <div id="kitchen__logo">picture</div>#}
-{#              </div>#}
-{##}
-{#              <div id="kitchen_menu_list" class="small-12 medium-12 large-10 columns">#}
-{#                  <nav class="k-inner__nav">#}
-{#                    <ul>#}
-{#                        <li><a href="#" class="k-inner_item">Dishes</a></li>#}
-{#                        <li><a href="#" class="k-inner_item">Recipes</a></li>#}
-{#                        <li><a href="#" class="k-inner_item">Converstaions</a></li>#}
-{#                        <li><a href="#" class="k-inner_item">Followers</a></li>#}
-{#                        <li><a href="#" class="k-inner_item">Following</a></li>#}
-{#                      </ul>#}
-{#                  </nav>#}
-{#            </div>#}
-{#        </div>#}
-{##}
-{#      </section>#}
-{##}
-{#      <!--bottom section --->#}
-{#      <section>#}
-{#      <div id="bottom" class="expanded row">#}
-{##}
-{#        <div class="small-12 columns">#}
-{#            <div class=" expanded row">#}
-{#                <div class="small-12 medium-3 large-2 columns menu">#}
-{#                    <nav class="side__nav">#}
-{#                        <ul>#}
-{#                            <li><a href="#" class="k-side_item1">About</a></li>#}
-{#                            <li><a href="#" class="k-side_item">Testimonials</a></li>#}
-{#                            <li><a href="#" class="k-side_item">Services</a></li>#}
-{#                            <li><a href="#" class="k-side_item">Delivery Areas</a></li>#}
-{#                            <li><a href="#" class="k-side_item">Sales</a></li>#}
-{##}
-{##}
-{#                            <!--Buttons -->#}
-{#                            <div class="btns">#}
-{#                                <li class="btn">#}
-{#                                    <a class="button" href="#">Contact Us</a>#}
-{#                                </li>#}
-{#                            </div>#}
-{#                            {% for name in user %}#}
-{#                                {% if name != chef.username %}#}
-{#                                    {% if not user %}#}
-{#                                        <form action="{% url "kitchen:follow" chef.username %}" method="POST">#}
-{#                                            {% csrf_token %}#}
-{#                                            <input class="button" type="submit" value="follow us" >#}
-{#                                        </form>#}
-{#                                    {% else %}#}
-{#                                        <form action="{% url "kitchen:unfollow" chef.username %}" method="POST">#}
-{#                                            {% csrf_token %}#}
-{#                                            <input class="button" type="submit" value="un follow" >#}
-{#                                        </form>#}
-{#                                    {% endif %}#}
-{#                                {% endif %}#}
-{#                            {% endfor %}#}
-{#                          </ul>#}
-{#                    </nav>#}
-{#                </div>#}
-{##}
-{#                <!------ Kitchen Content ------>#}
-{#                <div id="kitchen_content" class="small-12 medium-9 large-10 columns">#}
-{#                    <div class="expanded row">#}
-{#                        <div id="card1" class="small-6 medium-4 large-2 columns card">#}
-{#                            <div class="menu-pic">picture</div>#}
-{#                            <div class="menu-details">Menu details</div>#}
-{#                        </div>#}
-{##}
-{#                        <div id="card2" class="small-6 medium-4 large-2 columns card">#}
-{#                            <div class="menu-pic">picture</div>#}
-{#                            <div class="menu-details">Menu details</div>#}
-{#                        </div>#}
-{##}
-{#                        <div id="card3" class="small-6 medium-4 large-2 columns card">#}
-{#                            <div class="menu-pic">picture</div>#}
-{#                            <div class="menu-details">Menu details</div>#}
-{#                        </div>#}
-{##}
-{#                        <div id="card4" class="small-6 medium-4 large-2 columns card">#}
-{#                            <div class="menu-pic">picture</div>#}
-{#                            <div class="menu-details">Menu details</div>#}
-{#                        </div>#}
-{#                     </div>#}
-{#                </div> <!---kitchen content end ---->#}
-{#            </div><!---expanded row end -->#}
-{#          </div>#}
-{#      </div>#}
-{#      </section>#}
-{#    {% endif %}#}
-{#{% endblock %}#}

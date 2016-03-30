@@ -79,7 +79,7 @@ class MenuComment(Comment):
 # model to create Kitchens menu
 class Menu(DishItem):
     cost = models.FloatField(blank=False)
-    plates = models.IntegerField(default=1, blank=False,
+    plates = models.IntegerField(default=1, blank=True,
                                  validators=[
                                     MinValueValidator(1),
                                     MaxValueValidator(50)
