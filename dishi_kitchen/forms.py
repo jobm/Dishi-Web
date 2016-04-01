@@ -9,7 +9,8 @@ class KitchenForm(forms.ModelForm):
 
     class Meta:
         model = Kitchen
-        fields = ['kitchen_name', 'business_type', 'kitchen_type', 'about_kitchen']
+        fields = ['kitchen_name', 'business_type', 'kitchen_type',
+                  'about_kitchen', 'phone_number', 'secondary_email']
 
     business_type = forms.ChoiceField(
         label="What kind of kitchen do you need?",
@@ -37,6 +38,7 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ["title", "item_picture", "description", "ingredients"]
+    description = forms.CharField(label="how to prepare", widget=SummernoteWidget)
 
 
 # this a form to invite a user to a kitchen

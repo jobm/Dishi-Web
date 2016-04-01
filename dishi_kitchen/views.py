@@ -40,16 +40,18 @@ def kitchen_home(request, username):
     return render(request, "kitchen_layout.html", context=context)
 
 
-# this is not a view
+# this is not a view rather a helper method to set the context of a kitchen
 def set_kitchen_context(chef, *args):
     kitchen = get_object_or_none(Kitchen, owner=chef)
     menus = filter_object_or_none(Menu, owner_id=kitchen.owner_id)
-    print(menus)
+    recipes = filter_object_or_none(Recipe, owner_id=kitchen.owner_id)
+    print(recipes)
     k_t = dict(KITCHEN_TYPE_CHOICES)[kitchen.kitchen_type]
     b_t = dict(BUSINESS_TYPE_CHOICES)[kitchen.business_type]
     context = {"chef": chef,
                "kitchen": kitchen,
                "dishes": menus,
+               "recipes": recipes,
                "kitchen_type": k_t,
                "business_type": b_t,
                "username": args}
@@ -71,17 +73,21 @@ def create_kitchen(request, username):
     return render(request, "kitchen_reg_form.html", context=context)
 
 
+# view to edit kitchen details
+def edit_kitchen(request, username):
+    pass
+
+
 # view to render a form to add a menu item
 # http://localhost:8000/chef/kitchen/{{username}}/menu/
 def kitchen_menu(request, username):
-    chef = get_object_or_none(Chef, username=username)
     menu_form = MenuForm()
-    context = {"menu_form": menu_form, "chef": chef}
+    context = {"menu_form": menu_form, "username": username}
     return render(request, "menu_add_form.html", context=context)
 
 
 # view to add the menu item
-# http://localhost:8000/chef/kitchen/{{username}}/menu/create/
+# /chef/kitchen/{{username}}/menu/create/
 def add_kitchen_menu(request, username):
     menu_form = MenuForm(request.POST or None)
     chef = get_object_or_none(Chef, username=username)
@@ -93,11 +99,22 @@ def add_kitchen_menu(request, username):
             menu.save()
             menu_form.save_m2m()
             return redirect("/chef/kitchen/{}/".format(username))
-    return render(request, "menu_add_form.html", context={"menu_form": menu_form})
+    context = {"menu_form": menu_form, "username": username}
+    return render(request, "menu_add_form.html", context=context)
+
+
+# view to edit a kitchen menu
+def edit_kitchen_menu(request, username):
+    pass
+
+
+# view to delete a kitchen menu
+def delete_kitchen_menu(request, username):
+    pass
 
 
 # view to render a form to add a recipe item
-# http://localhost:8000/chef/kitchen/{{username}}/recipe/
+# /chef/kitchen/{{username}}/recipe/
 def kitchen_recipe(request, username):
     recipe_form = RecipeForm()
     context = {"recipe_form": recipe_form, "username": username}
@@ -107,14 +124,27 @@ def kitchen_recipe(request, username):
 # view to add recipe item
 def add_kitchen_recipe(request, username):
     recipe_form = RecipeForm(request.POST or None)
+    chef = get_object_or_none(Chef, username=username)
+    kitchen = get_object_or_none(Kitchen, owner=chef)
     if request.method == 'POST':
         if recipe_form.is_valid():
             recipe = recipe_form.save(commit=False)
-            recipe.owner_id = request.user.id
+            recipe.owner = kitchen
             recipe.save()
             recipe_form.save_m2m()
-            return redirect("/kitchen/{}/".format(username))
-    return render(request, "menu_add_form.html", context={"menu_form": recipe_form})
+            return redirect("/chef/kitchen/{}/".format(username))
+    context = {"recipe_form": recipe_form, "username": username}
+    return render(request, "recipe_add_form.html", context=context)
+
+
+# view to edit a kitchen menu
+def edit_kitchen_recipe(request, username):
+    pass
+
+
+# view to delete a kitchen menu
+def delete_kitchen_recipe(request, username):
+    pass
 
 
 # view to follow a kitchen

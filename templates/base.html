@@ -5,25 +5,18 @@
     <meta charset="UTF-8">
     <title>dishi</title>
 
-    <link rel="stylesheet" href="{% static 'foundation/css/normalize.css' %}">
-    <link rel="stylesheet" href="{% static 'foundation/foundation-icons/foundation-icons.css' %}">
-    {#<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.0/foundation.css">#}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
-    <link rel="stylesheet" href="{% static 'foundation/css/bill_kitchenapp.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.1.2/foundation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.min.css" />
-    {#<link rel="stylesheet" href="{% static 'css/styles.css' %}">#}
     <link rel="stylesheet" href="{% static 'font/fonts.css' %}">
-    {#<link rel="stylesheet" href="{% static 'foundation/css/app.css' %}">#}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
     <link rel="stylesheet" href="{% static 'css/tag-it.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/backend_override.css' %}" type="text/css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre Baskervill">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
 
 </head>
 
 <body>
-         <!--=====Top level navigation=====-->
     <header class="header">
         <!--mobile menu-->
         <div class="title-bar" data-hide-for="medium" data-responsive-toggle=
@@ -71,17 +64,16 @@
                 </ul>
             </div>
         </div>
-    </header><!--modal content-->
+    </header>
 {% block content %}
 
 {% endblock %}
 
-<script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.1.2/foundation.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.1.2/foundation.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="{% static 'js/tag-it.js' %}" charset="utf-8"></script>
-<script type="text/javascript" src="//raw.githubusercontent.com/kombai/freewall/master/freewall.js"></script>
+<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 <script type="text/javascript" src="{% static "foundation/js/vendor/what-input.min.js" %}"></script>
 <script src="{% static 'foundation/js/animatedModal.min.js' %}"></script>
 <script>

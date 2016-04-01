@@ -2,9 +2,12 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="row">
+        {{ username }}
         <br>
-        <form action="">
+        <form action="{% url "dishi_chef:kitchen:add_recipe" username %}" method="POST">
+            {% csrf_token %}
             {{ recipe_form }}
+            <input class="button" type="submit" value="add">
         </form>
         <br>
     </div>

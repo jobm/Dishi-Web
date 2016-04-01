@@ -1,0 +1,761 @@
+html {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Raleway',sans-serif;
+    background-color: #eee;
+    overflow-x: hidden;
+}
+
+ul {
+    list-style: none;
+}
+
+section {
+    width: 100%;
+}
+
+i {
+    margin-left: 10px;
+}
+
+a {
+    color: #ea5c22;
+}
+
+a:hover,a:focus {
+    color: #ff7840;
+}
+
+.main {
+    background-color: #fff;
+}
+
+/**--------- Aligning Divs ---------**/
+.center-h {
+    left: 50%;
+    transform: translate(-50%,0%);
+    position: absolute;
+}
+
+.center-v {
+    top: 50%;
+    transform: translate(0%,-50%);
+    position: absolute;
+}
+
+.center-c {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+}
+
+.center-page {
+    width: 100%;
+    margin: 0 auto;
+}
+
+hr {
+    margin: 0;
+    padding: 0;
+}
+
+/*--------------------Top level navigation --------------*/
+/*---Header--*/
+.header {
+    height: auto;
+    background-color: #fff;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+/*
+*
+*Banner
+*/
+#kitchen__banner {
+    width: 100%;
+    position: relative;
+    min-height: 150px;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.banner {
+    position: relative;
+    background-size: cover;
+    max-width: 100%;
+    max-height: auto;
+}
+
+.image-banner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.detail {
+    position: absolute;
+    bottom: 80px;
+    left: 380px;
+}
+
+/*
+*
+*Kitchen logo
+*
+*/
+/*
+*Kitchen__menu
+*k-inner__nav
+*
+*/
+/*.k-inner__nav {
+	margin-left: em;}*/
+/*------------- Kitchen Menu------------*/
+#kitchen__menu {
+    background-color: #fff;
+    position: relative;
+    height: 76.5px;
+    padding: 2px 1px 0 0;
+    border-bottom: 1px solid #ea5c22;
+}
+
+#kitchen__logo {
+    background-color: #000;
+    height: 150px;
+    width: 150px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+    overflow: hidden;
+}
+
+.k-inner_item {
+    line-height: 1;
+    display: block;
+    text-align: center;
+}
+
+.k-link,.k-link-value {
+    display: inline-block;
+}
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+    #kitchen__logo {
+        width: 80px;
+        height: 80px;
+        bottom: 80px;
+        left: 5px;
+    }
+
+    #kitchen__menu {
+        padding: 0 !important;
+    }
+}
+
+/*    Medium Only*/
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+    #kitchen__logo {
+        bottom: 65px;
+        height: 100px;
+        width: 100px;
+    }
+
+    .k-inner__nav {
+        margin-left: 1em;
+    }
+}
+
+/*---------------Side Nav------------------*/
+/*--------------Kitchen content ----------*/
+.menu-pic {
+    overflow: hidden;
+    height: 170px;
+    background-color: #f5f5dc;
+}
+
+.item {
+    padding: .5em;
+}
+
+.menu-title {
+    object-fit: contain;
+    background-color: #fef;
+    height: auto;
+}
+
+/************rewrite css********************/
+.kitchen-data {
+    position: relative;
+    display: block;
+    line-height: 40px;
+    width: 100%;
+}
+
+.kitchen-data >i,.icon {
+    position: relative;
+    display: inline;
+    max-width: 7px;
+    margin-right: .3em;
+}
+
+.kitchen-data >.icon-text {
+    position: absolute;
+    left: 2em;
+}
+
+@media screen and (max-width: 39.9375em) {
+    .styled-grid {
+        display: none;
+    }
+
+    #mobile-about {
+        display: block;
+    }
+}
+
+.styled-grid {
+    padding: 1.5em 60px;
+}
+
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+    .styled-grid {
+        padding: 0 1.5em;
+    }
+}
+
+.kitchen-card-item,.kitchen-card-list {
+    list-style: none;
+}
+
+.watch-list {
+    width: 100%;
+}
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: auto;
+}
+
+#mobile-about {
+    display: none;
+}
+
+/* headlines with lines */
+.decorated {
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 1.6em;
+}
+
+.decorated > span {
+    position: relative;
+    display: inline-block;
+}
+
+.decorated > span:before,.decorated > span:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    border-bottom: 2px solid;
+    width: 100px;
+/* half of limiter */
+    margin: 0 50px;
+}
+
+.decorated > span:before {
+    right: 90%;
+}
+
+.decorated > span:after {
+    left: 90%;
+}
+
+/*add item content*/
+.form-addItem-holder {
+/*z-index:9998;*/
+    width: 35em;
+    height: 50em;
+    position: relative;
+    transform: translate(40%,-22%);
+}
+
+.form-addItem-holder .add {
+/*z-index: 9999;*/
+    position: absolute;
+    margin: .2em 0;
+    padding: 1em;
+    width: 100%;
+    height: auto;
+    border: 1px solid #ea5c22;
+    background-color: rgba(10,10,10,0.4);
+}
+
+.form-addItem-holder .add input[type=text],input[type=number] {
+    color: #ea5c22;
+    border-radius: 5px;
+}
+
+textarea {
+    resize: none;
+}
+
+.form-h {
+    position: relative;
+}
+
+.form-closeIcon {
+    padding: .6em 0 .6em .9em;
+    min-height: 42px;
+    min-width: 42px;
+    position: absolute;
+    right: 18px;
+    top: -50px;
+    cursor: pointer;
+}
+
+.is-animated-in {
+    animation: animate-in .9s ease-in-out forwards;
+}
+
+.is-animated-out {
+    animation: animate-out .9s ease-in-out forwards;
+}
+
+.recipe-form,textarea {
+    border-radius: 5px;
+}
+
+@keyframes animate-in {
+    from {
+        transform: translate(40%,65%);
+    }
+
+    to {
+        transform: translate(40%,-120%);
+    }
+}
+
+@keyframes animate-out {
+    to {
+        transform: translate(20%,-120%);
+    }
+
+    from {
+        transform: translate(20%,65%);
+    }
+}
+
+.add-item-links > ul {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.add-item-links > ul li {
+    color: #f17f42;
+    display: inline-block;
+    margin: 9em 4em;
+    cursor: pointer;
+}
+
+.add-item-links > ul li:hover {
+    transform: scale(1.3);
+}
+
+.card-kitchen {
+    margin: 15px;
+    border-radius: 5px;
+    background-color: #fff;
+    position: relative;
+    display: block;
+    border: 1px solid #ea5c22;
+    width: 450px;
+    height: auto;
+}
+
+.card-kitchen hr {
+    color: #ea5c22;
+}
+
+.card-kitchenName {
+    border-bottom: 1px solid #ea5c22;
+    border-bottom-width: 80%;
+    padding: .9em .9em 0;
+}
+
+.card-kitchen-link {
+    color: #ea5c22;
+    transition: all .3s ease;
+}
+
+.card-kitchen-link:hover {
+    color: #1585cf;
+}
+
+.card-kitchenImage {
+    margin: .3em;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-color: #200;
+}
+
+.card-kitchenImage,.card-kitchenImageDetails {
+    display: inline-block;
+}
+
+.card-kitchenImage,.card-kitchenImageDetails > .details:nth-child(2) {
+    font-size: 13px;
+    color: #202020;
+}
+
+.card-dishPicture {
+    overflow: hidden;
+    position: relative;
+    border: 4px solid #fff;
+    padding: 0;
+    height: 250px;
+    width: 100%;
+}
+
+.card-contentPadding {
+    padding: .9em;
+}
+
+.card-recipeDetails {
+    padding: .9em;
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+}
+
+.card-dishPicture>figure {
+    background: linear-gradient(rgba(),rgba());
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card-dishPicture > figure > img {
+}
+
+.card-dishPicture >figure figcaption p {
+    color: #fff;
+}
+
+.card-dishPicture>figure figcaption {
+    color: #fff;
+    position: absolute;
+    padding: 0 1em;
+    left: 5px;
+    bottom: 0;
+}
+
+.card-dishContent,.plates-order {
+    display: inline-block;
+}
+
+.card-dishContent .card-contentHeading {
+    font-family: 'Dancing Script',cursive;
+    font-size: 30px;
+    color: #ea5c22;
+}
+
+.card-dishContent > .button {
+    color: #fff;
+    font-size: 20px;
+    background-color: #ea5c22;
+    font-family: 'Dancing Script',cursive;
+    height: 60px;
+    width: 6em;
+    margin-left: 5em;
+}
+
+.card-chefDetails {
+    padding: .9em;
+}
+
+/*.card-chefDetails,.card-chefLink{}*/
+.card-chefDetails h5 {
+    font-size: 16px;
+}
+
+.card-chefImage {
+    background-color: #200;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+}
+
+.card-chefImage,h5 {
+    display: inline-block;
+}
+
+.card-dishRatings {
+    padding: .3em;
+    background-color: rgba(10,10,10,.1);
+}
+
+.card-dishRatings > .ratings {
+    padding: .5em;
+    display: inline-block;
+}
+
+.ratings > ul li {
+    display: inline-block;
+}
+
+.card-dishContent.is-recipe {
+    display: none;
+}
+
+.card-kitchenName.is-kitchen {
+    display: none;
+}
+
+.circled {
+    text-align: center;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background: red;
+    position: relative;
+}
+
+@media screen and (max-width: 39.9375em) {
+    .card-kitchen {
+        width: 332px;
+    }
+
+    .card-dishContent > .button {
+        height: 40px;
+        width: 6.38em;
+        font-size: 13.5px;
+    }
+}
+
+.watcher-pictureHolder {
+    display: block;
+    width: 27%;
+    float: left;
+}
+
+.watcher-nameHolder {
+    display: block;
+    padding: 4.5em;
+    height: 150px;
+    width: 73%;
+}
+
+.watcher-picture {
+    margin: 1em;
+    height: 150px;
+    width: 150px;
+    border-radius: 100%;
+    border: 2px solid #ea5c22;
+}
+
+.watcher-name {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/***************foundation overrides*****************/
+.button {
+    background-color: transparent;
+    color: #ea5c22;
+    border: 1.5px solid #ea5c22;
+    width: 100%;
+}
+
+.button:hover {
+    color: #fff;
+    background-color: #ea5c22;
+}
+
+.button:focus {
+    background: #fff;
+    color: #ea5c22;
+}
+
+.order-detail >.order {
+    width: 10em;
+}
+
+.badge {
+    width: 10%;
+    margin: 10px;
+    background: #ea5c22;
+}
+
+.tabs {
+    max-width: 100%;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    list-style-type: none;
+    background: #fff;
+    border: #fff;
+}
+
+.tabs-title > a:focus,.tabs-title > a[aria-selected='true'] {
+    background-color: rgba(234,92,34,.3);
+    color: #ea5c22;
+    transition: all .3s ease;
+}
+
+.tabs-title > a:hover {
+    color: #ea5c22;
+    background-color: rgba(234,92,34,.1);
+}
+
+.tabs-content {
+    background: #fff;
+    transition: all .5s ease;
+    border: 1px solid #eee;
+    border-top: 0;
+}
+
+.tabs-panel {
+    padding: .3rem;
+}
+
+.tabs-title > a {
+    display: inline-block;
+    padding: 1.25rem 1.5rem;
+    line-height: 1;
+    font-size: 14.5px;
+    color: #212121;
+}
+
+/*Medium only*/
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+    .k-inner__nav {
+        width: 100%;
+    }
+
+    .tabs {
+        max-width: 100%;
+        margin-left: -3em;
+    }
+
+    .tabs-title {
+        height: auto;
+        width: auto;
+    }
+
+    .k-link .badge {
+        display: block;
+    }
+
+    .tabs-title > a {
+        font-size: 12px;
+        width: auto;
+    }
+
+    .tabs-content {
+        width: 10%;
+        margin-left: 4em;
+    }
+}
+
+@media screen and (min-width: 64em) and (max-width: 74.9375em) {
+    .k-inner__nav {
+        height: auto;
+    }
+
+    .tabs {
+        width: 100%;
+        display: inline;
+        font-size: 13px;
+    }
+
+    .tabs-content {
+        margin-left: 5em;
+    }
+}
+
+/*Small only*/
+@media screen and (max-width: 39.9375em) {
+    .k-inner__nav {
+        height: auto;
+    }
+
+    .tabs {
+        width: 100%;
+        display: inline;
+        font-size: 10px;
+        margin-left: 0;
+    }
+
+    .tabs-title {
+        width: 7em;
+    }
+
+    .tabs-title > a {
+        padding: 1rem .5rem;
+        font-size: 10px;
+        width: auto;
+    }
+
+    .tabs-content {
+        font-size: 13.5px;
+        margin-left: -7.5em;
+    }
+}
+
+/*Large only*/
+@media screen and (min-width: 64em) {
+    .tabs {
+        margin: 0;
+    }
+}
+
+.top-bar-right,.menu >.add-item,.search-item,.inv {
+    margin: 0 .5em;
+}
+
+.top-bar,.top-bar ul {
+    background-color: #fff;
+}
+
+.row {
+    max-width: 85rem !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.reveal {
+    margin: 0;
+    height: 60em;
+    width: 63%;
+    overflow: hidden;
+/*border: 3px solid #fff;*/
+    border-radius: 5px;
+    background-color: rgba(10,10,10,0.1);
+}
+
+#id_ingredients {
+    max-width: 100%;
+    height: auto;
+}
+
+/**************foundation overrides end****************/
