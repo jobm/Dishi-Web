@@ -6,7 +6,7 @@ from shared_files.dishi_user import (get_object_or_none,
                                      filter_object_or_none,
                                      BUSINESS_TYPE_CHOICES,
                                      KITCHEN_TYPE_CHOICES)
-from dishi_kitchen.models import Menu, Recipe, Invite
+from dishi_kitchen.models import Menu, MenuLike, Recipe, Invite, Conversation
 from django.core.mail import send_mail
 
 
@@ -43,15 +43,17 @@ def kitchen_home(request, username):
 # this is not a view rather a helper method to set the context of a kitchen
 def set_kitchen_context(chef, *args):
     kitchen = get_object_or_none(Kitchen, owner=chef)
-    menus = filter_object_or_none(Menu, owner_id=kitchen.owner_id)
-    recipes = filter_object_or_none(Recipe, owner_id=kitchen.owner_id)
-    print(recipes)
+    menus = filter_object_or_none(Menu, owner=kitchen)
+    recipes = filter_object_or_none(Recipe, owner_id=kitchen)
+    conversations = filter_object_or_none(Conversation, owner=kitchen)
+    print(conversations)
     k_t = dict(KITCHEN_TYPE_CHOICES)[kitchen.kitchen_type]
     b_t = dict(BUSINESS_TYPE_CHOICES)[kitchen.business_type]
     context = {"chef": chef,
                "kitchen": kitchen,
                "dishes": menus,
                "recipes": recipes,
+               "conversations": conversations,
                "kitchen_type": k_t,
                "business_type": b_t,
                "username": args}
@@ -111,6 +113,22 @@ def edit_kitchen_menu(request, username):
 # view to delete a kitchen menu
 def delete_kitchen_menu(request, username):
     pass
+
+
+# view to like a kitchen menu
+def like_kitchen_menu(request, username):
+    like = get_object_or_none(MenuLike, liker=request.user)
+    if not like:
+        like.like += 1
+        like.liker = request.user
+        like.save()
+
+
+# view to unlike a kitchen menu
+def unlike_kitchen_menu(request, username):
+    like = get_object_or_none(MenuLike, liker=request.user)
+    if like:
+        like.delete()
 
 
 # view to render a form to add a recipe item
