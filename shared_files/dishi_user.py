@@ -4,11 +4,13 @@ from django.contrib.auth.models import User
 
 # shared user models
 class DishiUser(models.Model):
-    username = models.CharField(max_length=50, blank=True)
-    first_name = models.CharField(max_length=50, blank=False)
-    last_name = models.CharField(max_length=50, blank=False)
-    email = models.EmailField(max_length=50, blank=False)
+    username = models.CharField(max_length=50, blank=True, default="your username")
+    first_name = models.CharField(max_length=50, blank=False, default="your first name")
+    last_name = models.CharField(max_length=50, blank=False, default="your last name")
+    email = models.EmailField(max_length=50, blank=False, default="example@example.com")
     profile_picture = models.ImageField(blank=True)
+    date_created = models.DateTimeField(auto_now=True)
+    date_updated = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         abstract = True
@@ -18,6 +20,8 @@ class DishItem(models.Model):
     title = models.CharField(max_length=50, blank=False)
     item_picture = models.ImageField(blank=True)
     description = models.TextField()
+    date_created = models.DateTimeField(auto_now=True)
+    date_updated = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         abstract = True

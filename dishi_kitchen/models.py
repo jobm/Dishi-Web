@@ -93,8 +93,6 @@ class Menu(DishItem):
     """this field creates a relationship meaning that a kitchen can have many
     menus"""
     owner = models.ForeignKey(Kitchen)
-    date_created = models.DateTimeField(auto_now=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
 
 
 # models to store Recipe likes and comments
@@ -114,7 +112,6 @@ class RecipeComment(Comment):
 class Recipe(DishItem):
     # comma separated field of instructions
     ingredients = models.TextField(blank=True)
-    likes = models.IntegerField(blank=True)
     comments = models.ManyToManyField(RecipeComment,
                                       related_name="recipe_comment",
                                       symmetrical=False)
@@ -124,8 +121,6 @@ class Recipe(DishItem):
     """this field creates a relationship meaning that a kitchen can create many
     recipes"""
     owner = models.ForeignKey(Kitchen)
-    date_created = models.DateTimeField(auto_now=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
 
 
 # invite model

@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect
-# from dishi_chef.forms import KitchenForm, InviteForm
 from dishi_chef.models import Chef
-from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from shared_files.dishi_user import get_object_or_none
 from dishi_chef.forms import ChefForm

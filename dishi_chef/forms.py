@@ -7,7 +7,8 @@ from django_summernote.widgets import SummernoteWidget
 class ChefForm(forms.ModelForm):
     class Meta:
         model = Chef
-        fields = ['username', 'email', 'first_name', 'last_name', 'about_chef']
+        exclude = ['date_created', 'date_updated', "owner", "is_chef"]
+        # fields = ['username', 'email', 'first_name', 'last_name', 'about_chef']
         widgets = {
             'about_chef': SummernoteWidget(),
         }
