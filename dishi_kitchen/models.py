@@ -8,8 +8,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # model to create a Kitchen
 class Follower(models.Model):
-    follower = models.ForeignKey(User, blank=True)
-    date_followed = models.DateTimeField(auto_now=True)
+    follower = models.OneToOneField(User, unique=True, blank=True)
 
     def __str__(self):
         return self.follower.username
@@ -26,10 +25,8 @@ class Kitchen(models.Model):
     secondary_email = models.EmailField(blank=True, default="example@example.com")
     """"this field creates a relationship to a chef identifying them as an
     owner of a kitchen meaning one chef one kitchen"""
-    owner = models.OneToOneField(Chef, primary_key=True)
-    followers = models.ManyToManyField(Follower,
-                                       related_name="kitchen_follower",
-                                       symmetrical=False)
+    owner = models.OneToOneField(Chef, unique=True, primary_key=True)
+    followers = models.ManyToManyField(Follower)
     date_created = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 
@@ -39,14 +36,14 @@ class Kitchen(models.Model):
 
 # model to hold the comments of a conversation
 class ConversationComment(Comment):
-    date_created = models.DateTimeField(auto_now=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.commenter.username
 
 
 # model to hold the like of a conversation
 class ConversationLike(Like):
-    date_created = models.DateTimeField(auto_now=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.liker.username
 
 
 # model to create a kitchen's conversation
@@ -66,14 +63,14 @@ class Conversation(models.Model):
 # models to store Menu likes and comments
 # Menu likes model
 class MenuLike(Like):
-    date_created = models.DateTimeField(auto_now=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.liker.username
 
 
 # Menu comments model
 class MenuComment(Comment):
-    date_created = models.DateTimeField(auto_now=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.commenter.username
 
 
 # model to create Kitchens menu
@@ -84,10 +81,17 @@ class Menu(DishItem):
                                     MinValueValidator(1),
                                     MaxValueValidator(50)
                                  ])
+    remaining_plates = models.IntegerField(default=1, blank=True,
+                                           validators=[
+                                               MinValueValidator(1),
+                                               MaxValueValidator(50)
+                                           ])
     comments = models.ManyToManyField(MenuComment,
+                                      blank=True,
                                       related_name="menu_comment",
                                       symmetrical=False)
     likes = models.ManyToManyField(MenuLike,
+                                   blank=True,
                                    related_name="menu_like",
                                    symmetrical=False)
     """this field creates a relationship meaning that a kitchen can have many
@@ -98,14 +102,12 @@ class Menu(DishItem):
 # models to store Recipe likes and comments
 # Menu likes model
 class RecipeLike(Like):
-    date_created = models.DateTimeField(auto_now=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
+    pass
 
 
 # Menu comments model
 class RecipeComment(Comment):
-    date_created = models.DateTimeField(auto_now=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
+    pass
 
 
 # model to create a recipe

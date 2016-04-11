@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="row">
-    <form action="{% url 'dishi_chef:save_reg_form'  %}" method="post">
+    <form action="{% url 'dishi_chef:save_reg_form'  username %}" method="post">
         <div class="container">
             {% csrf_token %}
             {% crispy chef_form  %}

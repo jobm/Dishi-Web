@@ -254,7 +254,7 @@
                                                 rolls</strong></i></h5>
                                                 <p><i>{{ dish.description }}</i></p>
                                                 <p class="plates-order">Plates
-                                                remaining: 27/50</p><a class=
+                                                remaining: {{ dish.remaining_plates }}/{{ dish.plates }}</p><a class=
                                                 "button plates-order" href=
                                                 "#">Order now</a>
                                             </div>
@@ -264,14 +264,15 @@
                                                 </div><span class=
                                                 "card-chefLink"><a href="#">
                                                 <h5><span class=
-                                                "card-chefLink">By: Chef
-                                                Amanda</span></h5></a></span>
+                                                "card-chefLink">By Chef: {{ chef.username }}
+                                                </span></h5></a></span>
                                             </div>
                                             <div class="card-dishRatings">
                                                 <div class=
                                                 "ratings card-likes">
-                                                    <a href="#"><i class=
-                                                    "fa fa-heart-o"></i><span class="likes-counter counter">300</span></a>
+                                                    <a href="#"><i class="fa fa-heart-o">
+                                                        </i><span class="likes-counter counter">{{ dish.likes.like }}</span>
+                                                    </a>
                                                 </div>
                                                 <div class=
                                                 "ratings card-comments">
@@ -297,7 +298,9 @@
                             <div class="tabs-panel" id="recipes">
                                 <ul class="kitchen-card-list" id="container">
                                     <li class="kitchen-card-item">
-                                        <div class="card-kitchen">
+                                        {% if recipes %}
+                                            {% for recipe in recipes %}
+                                                    <div class="card-kitchen">
                                             <div class="card-dishPicture">
                                                 <figure>
                                                     <img alt="Dish" src=
@@ -313,14 +316,9 @@
                                                         <i></i>
                                                         <h5 class=
                                                         "card-contentHeading">
-                                                        <i><strong>Apple
+                                                        <i><strong>{{ recipe.title }}
                                                         pie</strong></i></h5>
-                                                        <p><i>Mouth watering
-                                                        dish made wih a touch
-                                                        of honey,fresh apples
-                                                        and mint to give an
-                                                        exotic taste you will
-                                                        never forget</i></p>
+                                                        <p><i>{{ recipe.description }}</i></p>
                                                     </figcaption>
                                                 </div>
                                             </div>
@@ -331,7 +329,7 @@
                                                 "card-chefLink"><a href="#">
                                                 <h5><span class=
                                                 "card-chefLink">By: Chef
-                                                Amanda</span></h5></a></span>
+                                                {{ chef.username }}</span></h5></a></span>
                                             </div>
                                             <div class="card-dishRatings">
                                                 <div class=
@@ -351,13 +349,20 @@
                                                 </div>
                                             </div>
                                         </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <h4>no recipes at the moment</h4>
+                                        {% endif %}
                                     </li>
                                 </ul>
                             </div>
                             <div class="tabs-panel" id="conversations">
                                 <ul class="kitchen-card-list" id="container">
                                     <li>
-                                        <div class="card-kitchen">
+                                      {% if conversations %}
+
+                                          {% for conversation in conversations %}
+                                            <div class="card-kitchen">
                                             <div class="card-dishPicture">
                                                 <figure>
                                                     <img alt="Dish" src=
@@ -370,11 +375,7 @@
                                             <div class=
                                             "card-conversatoinContent card-contentPadding">
                                             <i></i>
-                                                <p><i>Hey guys, I was excited
-                                                to try out one of Amanda's new
-                                                cakes.I would recommend you to
-                                                check it out :D</i></p>
-                                                <!--<a class="conversation-linktoorder">Follow link to order</a>-->
+                                                <p><i>{{ conversation.post }}</i></p>
                                             </div>
                                             <hr>
                                             <div class="card-chefDetails">
@@ -396,11 +397,12 @@
                                                     <a href="#"><i class=
                                                     "fa fa-comment-o"></i><span class="comments-counter counter">46</span></a>
                                                 </div>
-                                                <!--<div class="ratings card-orders">
-                                              <a href="#"><i class="fa fa-bookmark-o"></i><span class="dishes-counter counter">50</span></a>
-                                        </div>-->
                                             </div>
                                         </div>
+                                          {% endfor %}
+
+                                      {% else %}
+                                      {% endif %}
                                     </li>
                                 </ul>
                             </div>

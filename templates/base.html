@@ -18,85 +18,63 @@
 
 <body>
     <header class="header">
-        <!--mobile menu-->
-        <div class="title-bar" data-hide-for="medium" data-responsive-toggle=
-        "example-menu">
-            <button class="menu-icon" data-toggle="" type="button"></button>
-            <div class="title-bar-title">
-                Menu
-            </div>
-            <div class="title-bar-right">
-                <a class="add-item" data-toggle="addItemModal"><i class=
-                "fa fa-pencil-square fa-2x"></i></a> <a class=
-                "search-item"><i class="fa fa-search fa-2x"></i></a>
-            </div>
-        </div><!--   Visible menu        -->
-        <div class="top-bar" id="example-menu">
-            <div class="top-bar-left">
-                <ul class="dropdown vertical medium-horizontal menu"
-                data-dropdown-menu="">
-                    <li class="menu-text">DISHI</li>
-                    <li>
-                        <a href="#">Order</a>
-                    </li>
-                    <li>
-                        <a href="testfile.html">Discover</a>
-                    </li>
-                    <li>
-                        <a href="#">Kitchens</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="top-bar-right">
-                <ul class="menu">
-                    <li>
-                        <a class="search-item" href="#"><i class=
-                        "fa fa-search fa-lg"></i></a>
-                    </li>
-                    <li>
-                        <a class="add-item" data-open="addItemModal"><i class=
-                        "fa fa-pencil-square fa-2x"></i></a>
-                    </li>
-                    <li class="btn">
-                        <a class="button inv" data-toggle=
-                        "inviteModal">Invite</a>
-                    </li>
-                </ul>
-            </div>
+    <!--mobile menu-->
+    <div class="title-bar" data-hide-for="medium" data-responsive-toggle=
+    "example-menu">
+        <button class="menu-icon" data-toggle="" type="button"></button>
+        <div class="title-bar-title">
+            Menu
         </div>
-    </header>
+        <div class="title-bar-right">
+            <a class="add-item" data-toggle="addItemModal"><i class=
+            "fa fa-pencil-square fa-lg"></i></a> <a class=
+            "search-item"><i class="fa fa-search fa-lg"></i></a>
+        </div>
+    </div><!--   Visible menu        -->
+    <div class="top-bar" id="example-menu">
+        <div class="top-bar-left">
+            <ul class="dropdown vertical medium-horizontal menu"
+            data-dropdown-menu="">
+                <li class="menu-text">DISHI
+                </li>
+                <li>
+                    <a href="#">Order</a>
+                </li>
+                <li>
+                    <a href="testfile.html">Discover</a>
+                </li>
+                <li>
+                    <a href="#">Kitchens</a>
+                </li>
+            </ul>
+        </div>
+        <div class="top-bar-right">
+            <ul class="menu">
+                <li>
+                    <a class="search-item is-mobile" href="#"><i class=
+                    "fa fa-search fa-lg"></i></a>
+                </li>
+                <li>
+                    <a class="add-item is-mobile" data-open=
+                    "addItemModal"><i class=
+                    "fa fa-pencil-square fa-lg"></i></a>
+                </li>
+                <li class="btn">
+                    <a class="button inv" data-toggle="inviteModal">Invite</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
 {% block content %}
 
 {% endblock %}
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.1.2/foundation.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/foundation/6.1.2/foundation.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="{% static 'js/tag-it.js' %}" charset="utf-8"></script>
-<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 <script type="text/javascript" src="{% static "foundation/js/vendor/what-input.min.js" %}"></script>
-<script src="{% static 'foundation/js/animatedModal.min.js' %}"></script>
-<script>
- $(function(){
-        $('.form-addRecipe').hide();
-        $('.form-addPost').hide();
-        $('.form-addDish').hide();
-
-        $('.addDish').click(function(){
-            $('.form-addDish').slideToggle(500);
-            return false;
-         });
-
-        $('.addRecipe').click(function(){
-            $('.form-addRecipe').slideToggle(500);
-            return false;
-        });
-
-        $('.addPost').click(function(){
-            $('.form-addPost').slideToggle(500);
-            return false;
-         });
-    });
-</script>
+<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 </body>
 </html>

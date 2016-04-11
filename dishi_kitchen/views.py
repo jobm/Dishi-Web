@@ -19,7 +19,7 @@ def kitchen_home(request, username):
     # kitchen for them
     context = {}
     chef = get_object_or_none(Chef, username=username)
-    if chef.username == username:
+    if chef.username == request.user.username:
         kitchen = get_object_or_none(Kitchen, owner=chef)
         if kitchen is None:
             kitchen_form = KitchenForm()
@@ -27,16 +27,15 @@ def kitchen_home(request, username):
             return render(request, "kitchen_reg_form.html", context=context)
         else:
             context = set_kitchen_context(chef, str(username))
-
     else:
         if chef is not None:
-            user = get_object_or_none(Follower, follower_id=request.user.id)
             kitchen = get_object_or_none(Kitchen, owner=chef)
+            followers = Follower.objects.filter(kitchen=kitchen)
             if kitchen is not None:
-                if user is None:
+                if followers is None:
                     context = set_kitchen_context(chef)
                 else:
-                    context = set_kitchen_context(chef, user)
+                    context = set_kitchen_context(chef, followers)
     return render(request, "kitchen_layout.html", context=context)
 
 
@@ -46,17 +45,20 @@ def set_kitchen_context(chef, *args):
     menus = filter_object_or_none(Menu, owner=kitchen)
     recipes = filter_object_or_none(Recipe, owner_id=kitchen)
     conversations = filter_object_or_none(Conversation, owner=kitchen)
-    print(conversations)
+    followers = Follower.objects.filter(kitchen=kitchen)
+    # print([dish for dish in menus][0].likes if not None else "Null")
     k_t = dict(KITCHEN_TYPE_CHOICES)[kitchen.kitchen_type]
     b_t = dict(BUSINESS_TYPE_CHOICES)[kitchen.business_type]
-    context = {"chef": chef,
-               "kitchen": kitchen,
-               "dishes": menus,
-               "recipes": recipes,
-               "conversations": conversations,
-               "kitchen_type": k_t,
-               "business_type": b_t,
-               "username": args}
+    context = {
+        "chef": chef,
+        "kitchen": kitchen,
+        "dishes": menus,
+        "recipes": recipes,
+        "conversations": conversations,
+        "followers": followers,
+        "kitchen_type": k_t,
+        "business_type": b_t,
+        "owner": args}
     return context
 
 
@@ -70,7 +72,7 @@ def create_kitchen(request, username):
             kitchen.owner = chef
             kitchen.save()
             kitchen_form.save_m2m()
-            return redirect("/chef/kitchen/{}/".format(username))
+            return redirect("/chef/{}/kitchen/".format(username))
     context = {"kitchen_form": kitchen_form, "chef": chef}
     return render(request, "kitchen_reg_form.html", context=context)
 
@@ -167,20 +169,17 @@ def delete_kitchen_recipe(request, username):
 
 # view to follow a kitchen
 def follow_kitchen(request, username):
-    # get the list of follower/followers of a kitchen
-    follower = get_object_or_none(Follower, follower=request.user)
-    # check if the follower/followers list has the person trying to follow the kitchen
-    # then check if the person requesting the kitchen is the owner
-    if follower is None and request.user.username != username:
-        # initialize/create the follower, add the user then save them
+    chef = get_object_or_none(Chef, username=username)
+    kitchen = get_object_or_none(Kitchen, owner=chef)
+    if request.user in Follower.objects.filter(kitchen=kitchen):
         follower = Follower(follower=request.user)
-        follower.follower = request.user
         follower.save()
-    return redirect("/kitchen/{}/".format(username))
+        kitchen.followers.add(follower)
+    return redirect("/chef/kitchen/{}/".format(username))
 
 
 # view to un follow a kitchen
-def unfollow_kitchen(request, username):
+def un_follow_kitchen(request, username):
     f = get_object_or_none(Follower, follower=request.user)
     if f is not None:
         f.delete()

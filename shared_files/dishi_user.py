@@ -28,8 +28,9 @@ class DishItem(models.Model):
 
 
 class Like(models.Model):
-    like = models.IntegerField()
     liker = models.ForeignKey(User, blank=True)
+    date_created = models.DateTimeField(auto_now=True)
+    date_updated = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         abstract = True
@@ -38,6 +39,8 @@ class Like(models.Model):
 class Comment(models.Model):
     comment = models.TextField()
     commenter = models.ForeignKey(User, blank=True)
+    date_created = models.DateTimeField(auto_now=True)
+    date_updated = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         abstract = True

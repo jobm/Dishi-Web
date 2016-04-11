@@ -14,19 +14,20 @@ LOGIN_URL = "/auth/accounts/login/"
 def chef_home(request):
     # check if the requesting user is an existing chef
     chef = get_object_or_none(Chef, owner_id=request.user.id)
-    print(chef)
     # if not an existing chef render a form to save the rest of his info
     if not chef:
         chef_form = ChefForm(instance=request.user)
+        context = {"username": request.user.username, "chef_form": chef_form}
         return render(request, 'chef_reg_form.html',
-                      context={"chef_form": chef_form})
+                      context=context)
     # if an existing chef redirect him to his profile page
-    return render(request, "chef_home.html", context={"chef": chef})
+    context = {"chef": chef}
+    return render(request, "chef_home.html", context=context)
 
 
 # this is the view function used to post a user to the database
 # url: /dishi/chef/save_chef_form
-def save_chef_reg_form(request):
+def save_chef_reg_form(request, username):
     chef_form = ChefForm(request.POST or None)
     if request.method == 'POST':
         if chef_form.is_valid():
@@ -35,7 +36,7 @@ def save_chef_reg_form(request):
             # chef.is_chef = True
             chef.save()
             chef_form.save_m2m()
-            return redirect('/chef/')
+            return redirect('/chef/{}/kitchen/'.format(username))
     return render(request, "chef_reg_form.html",
                   context={"chef_form": chef_form})
 

@@ -30,7 +30,8 @@ class KitchenForm(forms.ModelForm):
 class MenuForm(forms.ModelForm):
     class Meta:
         model = Menu
-        fields = ["title", "item_picture", "description", "cost"]
+        exclude = ["owner", "comments", "likes"]
+        # fields = ["title", "item_picture", "description", "cost"]
 
 
 # Recipe form
