@@ -2,13 +2,21 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="row">
-        {{ username }}
         <br>
-        <form action="{% url "dishi_chef:kitchen:add_recipe" username %}" method="POST">
-            {% csrf_token %}
-            {{ recipe_form }}
-            <input class="button" type="submit" value="add">
-        </form>
+        {% if recipe_add_form %}
+             <form action="{% url "dishi_chef:kitchen:add_recipe" username %}" method="POST">
+                {% csrf_token %}
+                {{ recipe_add_form }}
+                <input class="button" type="submit" value="add">
+            </form>
+        {% elif recipe_edit_form %}
+             <form action="{% url "dishi_chef:kitchen:update_recipe" username pk %}" method="POST">
+                {% csrf_token %}
+                {{ recipe_edit_form }}
+                <input class="button" type="submit" value="add">
+             </form>
+        {% endif %}
+
         <br>
     </div>
 {% endblock %}

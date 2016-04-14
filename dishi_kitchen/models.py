@@ -8,7 +8,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # model to create a Kitchen
 class Follower(models.Model):
-    follower = models.OneToOneField(User, unique=True, blank=True)
+    follower = models.OneToOneField(User, blank=True)
 
     def __str__(self):
         return self.follower.username

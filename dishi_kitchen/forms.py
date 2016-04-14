@@ -27,15 +27,30 @@ class KitchenForm(forms.ModelForm):
 
 
 # menu form
-class MenuForm(forms.ModelForm):
+class MenuAddForm(forms.ModelForm):
     class Meta:
         model = Menu
         exclude = ["owner", "comments", "likes"]
         # fields = ["title", "item_picture", "description", "cost"]
 
 
+# menu edit form
+class MenuEditForm(forms.ModelForm):
+    class Meta:
+        model = Menu
+        exclude = ["owner", "comments", "likes"]
+
+
 # Recipe form
-class RecipeForm(forms.ModelForm):
+class RecipeAddForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ["title", "item_picture", "description", "ingredients"]
+    description = forms.CharField(label="how to prepare", widget=SummernoteWidget)
+
+
+# Recipe Edit Form
+class RecipeEditForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ["title", "item_picture", "description", "ingredients"]

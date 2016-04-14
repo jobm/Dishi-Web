@@ -13,6 +13,16 @@ urlpatterns = [
     url(r'^menu/create/$', views.add_kitchen_menu, name="add_menu"),
     url(r'^recipe/create/$', views.add_kitchen_recipe, name="add_recipe"),
 
+    url(r'^menu/(?P<pk>[0-9]+)/edit/$', views.edit_kitchen_menu, name="edit_menu"),
+    url(r'^menu/(?P<pk>[0-9]+)/update/$', views.update_kitchen_menu, name="update_menu"),
+    url(r'^menu/(?P<pk>[0-9]+)/delete/$', views.delete_kitchen_menu, name="delete_menu"),
+
+
+    url(r'^recipe/(?P<pk>[0-9]+)/edit/$', views.edit_kitchen_recipe, name="edit_recipe"),
+    url(r'^recipe/(?P<pk>[0-9]+)/update/$', views.update_kitchen_recipe, name="update_recipe"),
+    url(r'^recipe/(?P<pk>[0-9]+)/delete/$', views.delete_kitchen_recipe, name="delete_recipe"),
+
+
     url(r'^menu/like/$', views.like_kitchen_menu, name="like_menu"),
     url(r'^menu/unlike/$', views.unlike_kitchen_menu, name="unlike_menu"),
 

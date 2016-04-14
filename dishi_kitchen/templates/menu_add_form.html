@@ -4,11 +4,20 @@
 {{ username }}
 <div class="row">
     <br>
-    <form action="{% url "dishi_chef:kitchen:add_menu" username %}" method="POST">
-        {% csrf_token %}
-        {{ menu_form }}
-        <input class="button" type="submit" value="add menu">
-    </form>
+    {% if menu_add_form %}
+        <form action="{% url "dishi_chef:kitchen:add_menu" username %}" method="POST">
+            {% csrf_token %}
+            {{ menu_add_form }}
+            <input class="button" type="submit" value="add menu">
+        </form>
+    {% elif menu_edit_form %}
+         <form action="{% url "dishi_chef:kitchen:update_menu" username pk%}" method="POST">
+            {% csrf_token %}
+            {{ menu_edit_form }}
+            <input class="button" type="submit" value="add menu">
+         </form>
+    {% endif %}
+
     <br>
 </div>
 

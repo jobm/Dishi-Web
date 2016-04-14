@@ -181,9 +181,7 @@
                     <h6>{{ kitchen_type }}</h6>
                     <p>{{ kitchen.about_kitchen }}</p>
                     <div class="kitchen-data follow">
-                        <a class=" button" href="#"><span class=
-                        "icon"><i class="fa fa-plus"></i></span> <span class=
-                        "icon-text">Follow</span></a>
+
                     </div>
                 </div>
             </div>
@@ -197,9 +195,24 @@
                     <h6>{{ kitchen_type }}</h6>
                     {{ kitchen.about_kitchen }}
                     <div class="kitchen-data follow">
-                        <a class=" button" href="#"><span class=
-                        "icon"><i class="fa fa-plus"></i></span> <span class=
-                        "icon-text">Follow</span></a>
+{#                        {{ followers }}#}
+                    {{ is_owner }}
+                        {% if user in followers %}
+
+                                <a class=" button" href="{% url "dishi_chef:kitchen:un_follow" chef.username %}">
+                                    <span class="icon">
+                                        <i class="fa fa-minus"></i>
+                                    </span>
+                                    <span class="icon-text">Un Follow</span>
+                                </a>
+                            {% else %}
+                                <a class=" button" href="{% url "dishi_chef:kitchen:follow" chef.username %}">
+                                    <span class="icon">
+                                    <i class="fa fa-plus"></i>
+                                    </span>
+                                    <span class="icon-text">Follow</span>
+                                 </a>
+                        {% endif %}
                     </div>
                     <div class="kitchen-data">
                         <span class="icon"><i class=
@@ -237,6 +250,8 @@
                                     {% for dish in dishes  %}
                                         <li>
                                         <div class="card-kitchen">
+                                            <a href="{% url  "dishi_chef:kitchen:edit_menu" chef.username dish.pk %}">edit</a>
+                                            <br>
                                             <div class="card-dishPicture">
                                                 <figure>
                                                     <img alt="Dish" src="img/recipe5.jpg">
@@ -300,8 +315,9 @@
                                     <li class="kitchen-card-item">
                                         {% if recipes %}
                                             {% for recipe in recipes %}
-                                                    <div class="card-kitchen">
+                                            <div class="card-kitchen">
                                             <div class="card-dishPicture">
+                                                <a href="{% url  "dishi_chef:kitchen:edit_recipe" chef.username dish.pk %}"></a>
                                                 <figure>
                                                     <img alt="Dish" src=
                                                     "img/recipe.jpg">
