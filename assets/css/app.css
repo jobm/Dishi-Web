@@ -771,7 +771,7 @@ section.about-info {
 }
 .user-linkNavItem > ul li{display: inline-block;height: 100%;margin: 0;}
 .row {
-  max-width: 85rem !important;
+  max-width: 100% !important;
   margin-left: auto;
   margin-right: auto; }
  .order-modal {

@@ -7,7 +7,12 @@
 /env/
 /dep_env/
 db.sqlite3
-/dishi_chef/migrations/
-/dishi_kitchen/migrations/
+migrations/
 /dishi_env/
 /django-summernote/
+/obj/
+Dishi-Web.pyproj
+web.config
+web.debug.config
+ptvs_virtualenv_proxy.py
+bin/
