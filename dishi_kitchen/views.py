@@ -24,8 +24,8 @@ def kitchen_home(request, username):
     # kitchen for them
     context = {}
     chef = get_object_or_none(Chef, username=username)
-    if username == request.user.username:
-        kitchen = get_object_or_none(Kitchen, owner__username=chef.username)
+    if request.user.username == username:
+        kitchen = get_object_or_none(Kitchen, owner__username=username)
         if kitchen is None:
             kitchen_form = KitchenForm()
             context = {"kitchen_form": kitchen_form, "chef": chef}
@@ -308,4 +308,14 @@ def edit_a_conversation(request, username):
 
 # view to delete a post
 def delete_a_conversation(request, username):
+    pass
+
+
+# view to bookmark a menu
+def bookmark_menu_item(request, username):
+    pass
+
+
+# view to bookmark a recipe
+def bookmark_recipe_item(request, username):
     pass
