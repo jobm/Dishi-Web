@@ -9,12 +9,16 @@ PROJECT_ROOT = path.dirname(path.abspath(path.dirname(__file__)))
 DEBUG = True
 # TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['dishi-dev.azurewebsites.net', '127.0.0.1:3000']
+ALLOWED_HOSTS = ['dishi-dev.azurewebsites.net', 'localhost']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': path.join(PROJECT_ROOT, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dishihub',
+        'USER': 'postgres',
+        'PASSWORD': POSTGRESQL_PASSWORD,
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 # Local time zone for this installation. Choices can be found here:
@@ -137,6 +141,7 @@ INSTALLED_APPS = (
     'dishi_chef',
     'dishi_auth',
     'dishi_kitchen',
+    'dishi_user',
     # third party apps
     'djrill',
     'crispy_forms',
@@ -150,6 +155,10 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.twitter',
+    # django activity stream
+    'actstream',
+    # django postman
+    'postman',
 )
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "foundation-5"
@@ -167,9 +176,6 @@ SUMMERNOTE_CONFIG = {
     'height': '250px',
 }
 
-# django all-auth settings
-LOGIN_REDIRECT_URL = '/'
-SOCIALACCOUNT_QUERY_EMAIL = True
 
 SOCIALACCOUNT_PROVIDERS = \
     {
@@ -198,7 +204,6 @@ LOGOUT_URL = '/'
 
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
-SOCIALACCOUNT_QUERY_EMAIL = ACCOUNT_EMAIL_REQUIRED
 SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_AVATAR_SUPPORT = ('avatar' in INSTALLED_APPS)
 
@@ -234,3 +239,9 @@ LOGGING = {
 
 # Specify the default test runner.
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
+# django activity stream settings
+ACTSTREAM_SETTINGS = {
+    'MANAGER': 'actstream.managers.ActionManager',
+    'FETCH_RELATIONS': True,
+}

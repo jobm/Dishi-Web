@@ -10,4 +10,4 @@ class Chef(DishiUser):
     owner = models.OneToOneField(User, unique=True, primary_key=True)
 
     def __str__(self):
-        return self.username
+        return self.owner.username

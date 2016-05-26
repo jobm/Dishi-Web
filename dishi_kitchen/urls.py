@@ -28,4 +28,10 @@ urlpatterns = [
 
     url(r'^follow/$', views.follow_kitchen, name="follow"),
     url(r'^unfollow/$', views.un_follow_kitchen, name="un_follow"),
+
+    url(r'^menu/(?P<pk>[0-9]+)/bookmark/', views.bookmark_menu_item, name="bookmark_menu"),
+    url(r'^menu/(?P<pk>[0-9]+)/unbookmark/', views.remove_menu_bookmark, name="un_bookmark_menu"),
+
+    url(r'^recipe/(?P<pk>[0-9]+)/bookmark/', views.bookmark_recipe_item, name="bookmark_recipe"),
+    url(r'^recipe/(?P<pk>[0-9]+)/unbookmark/', views.remove_recipe_bookmark, name="un_bookmark_reccipe"),
 ]

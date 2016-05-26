@@ -6,15 +6,15 @@ from dishi_kitchen.models import Recipe, Menu
 
 # Create your models here.
 class NormalUser(DishiUser):
-    owner = models.OneToOneField(User, primary_key=True)
+    owner = models.OneToOneField(User, unique=True, primary_key=True)
 
 
 class MenuBookmark(models.Model):
-    owner = models.ForeignKey(NormalUser)
+    owner = models.OneToOneField(User)
     menu_item = models.ForeignKey(Menu)
 
 
 class RecipeBookmark(models.Model):
-    owner = models.ForeignKey(NormalUser)
+    owner = models.OneToOneField(User)
     menu_item = models.ForeignKey(Recipe)
 

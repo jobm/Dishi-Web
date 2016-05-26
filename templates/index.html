@@ -4,12 +4,12 @@
 
     {% if request.user.is_authenticated %}
         <div class="text-center">
-            <a class="button" href="{% url "dishi_chef:home" %}">get a kitchen</a>
+            <a class="button" href="{% url "dishi_user:home" %}">get a kitchen</a>
             <h1>{{ user.username }}</h1>
         </div>
     {% else %}
         <h1>Errr</h1>
-        <a class="button" href="{% url "dishi_chef:home" %}">get a kitchen</a>
+        <a class="button" href="{% url "dishi_user:dishi_chef:home" %}">get a kitchen</a>
     {% endif %}
 
 {% endblock %}

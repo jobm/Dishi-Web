@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+    <div>
+        <form action="{% url  "dishi_user:save_profile" %}" method="POST">
+            {% csrf_token %}
+            {{ user_form }}
+            <input type="submit" class="button submit orange-bg" value="complete"/>
+        </form>
+    </div>
+"
+{% endblock %}

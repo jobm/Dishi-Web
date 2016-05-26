@@ -199,14 +199,14 @@
                     {{ is_owner }}
                         {% if user in followers %}
 
-                                <a class=" button" href="{% url "dishi_chef:kitchen:un_follow" chef.username %}">
+                                <a class=" button" href="{% url "dishi_user:dishi_chef:kitchen:un_follow" chef.username %}">
                                     <span class="icon">
                                         <i class="fa fa-minus"></i>
                                     </span>
                                     <span class="icon-text">Un Follow</span>
                                 </a>
-                            {% else %}
-                                <a class=" button" href="{% url "dishi_chef:kitchen:follow" chef.username %}">
+                            {% else %};
+                                <a class=" button" href="{% url "dishi_user:dishi_chef:kitchen:follow" chef.owner.username %}">
                                     <span class="icon">
                                     <i class="fa fa-plus"></i>
                                     </span>

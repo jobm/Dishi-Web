@@ -13,6 +13,9 @@ from shared_files.dishi_user import (get_object_or_none,
                                      KITCHEN_TYPE_CHOICES)
 from dishi_kitchen.models import Menu, MenuLike, Recipe, Invite, Conversation
 from django.core.mail import send_mail
+from actstream.actions import follow, unfollow
+from actstream.models import followers
+from dishi_user.models import MenuBookmark, RecipeBookmark
 
 
 # url:/dishi/chef/kitchen/
@@ -23,9 +26,9 @@ def kitchen_home(request, username):
     # if the person requesting is the owner of the username, and they are a verified chef,          # create a
     # kitchen for them
     context = {}
-    chef = get_object_or_none(Chef, username=username)
+    chef = get_object_or_none(Chef, owner__username=username)
     if request.user.username == username:
-        kitchen = get_object_or_none(Kitchen, owner__username=username)
+        kitchen = get_object_or_none(Kitchen, owner__owner__username=username)
         if kitchen is None:
             kitchen_form = KitchenForm()
             context = {"kitchen_form": kitchen_form, "chef": chef}
@@ -35,6 +38,7 @@ def kitchen_home(request, username):
     else:
         if chef is not None:
             kitchen = get_object_or_none(Kitchen, owner__username=chef.username)
+            print(followers(kitchen))
             if kitchen is not None:
                 context = set_kitchen_context(chef, request.user, is_owner=False)
             else:
@@ -241,27 +245,15 @@ def comment_on_a_kitchen_recipe(request, username, pk):
 
 # view to follow a kitchen
 def follow_kitchen(request, username):
-    chef = get_object_or_none(Chef, username=username)
-    kitchen = get_object_or_none(Kitchen, owner=chef)
-    followers = kitchen.followers.all()
-    if followers is not None:
-        if request.user not in followers:
-            follower = Follower(follower=request.user)
-            follower.save()
-            kitchen.followers.add(follower)
-    # else:
-    #     return redirect("/chef/{}/kitchen/".format(username))
+    kitchen = get_object_or_none(Kitchen, owner__username=username)
+    follow(request.user, kitchen)
     return redirect("/chef/{}/kitchen/".format(username))
 
 
 # view to un follow a kitchen
 def un_follow_kitchen(request, username):
-    chef = get_object_or_none(Chef, username=username)
-    kitchen = get_object_or_none(Kitchen, owner=chef)
-    followers = Follower.objects.filter(kitchen=kitchen)
-    if request.user in followers:
-        follower = get_object_or_none(Follower, follower=request.user)
-        kitchen.followers.remove(follower)
+    kitchen = get_object_or_none(Kitchen, owner__username=username)
+    unfollow(request.user, kitchen)
     return redirect("/chef/{}/kitchen/".format(username))
 
 
@@ -312,10 +304,36 @@ def delete_a_conversation(request, username):
 
 
 # view to bookmark a menu
-def bookmark_menu_item(request, username):
-    pass
+def bookmark_menu_item(request, username, pk):
+    menu_item = get_object_or_none(Menu, pk=pk)
+    bookmarked_menus = filter_object_or_none(MenuBookmark, owner__usename=username)
+    if menu_item not in bookmarked_menus:
+        menu_bookmark = MenuBookmark(owner=request.user)
+        menu_bookmark.menu_item = menu_item
+        menu_bookmark.save()
+    else:
+        return redirect("/chef/{}/kitchen/".format(username))
+    return redirect("/chef/{}/kitchen/".format(username))
+
+
+# view to remove menu bookmark
+def remove_menu_bookmark(request, username, pk):
+    menu_item = get_object_or_none(Menu, pk=pk)
+    bookmarked_menus = filter_object_or_none(MenuBookmark, owner__usename=username)
+    if menu_item in bookmarked_menus:
+        menu_bookmark = MenuBookmark(owner=request.user)
+        menu_bookmark.menu_item = menu_item
+        menu_bookmark.delete()
+    else:
+        return redirect("/chef/{}/kitchen/".format(username))
+    return redirect("/chef/{}/kitchen/".format(username))
 
 
 # view to bookmark a recipe
 def bookmark_recipe_item(request, username):
+    pass
+
+
+# view to remove recipe bookmark
+def remove_recipe_bookmark(request, username):
     pass
